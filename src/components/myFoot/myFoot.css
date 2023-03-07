@@ -1,0 +1,15 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 3rem; /* set the height of your footer here */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem; /* set the height of your footer here */
+}

@@ -1,0 +1,203 @@
+import React, { useState } from "react";
+import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  ToggleButtonGroup,
+  ToggleButton,
+  Image,
+} from "react-bootstrap";
+import img from "../../assets/100db.jpg";
+import { AiFillHeart, AiFillLike } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import PageItem from "react-bootstrap/PageItem";
+import "./myWork.css";
+import MyNav from "../myNav/MyNav";
+import { Link } from "react-router-dom";
+function MyComponent(props) {
+  const [activePage, setActivePage] = useState(1);
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+
+  const cardsPerPage = 8;
+  const totalCards = 32;
+  const totalPages = Math.ceil(totalCards / cardsPerPage);
+  const startIndex = (activePage - 1) * cardsPerPage;
+  const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
+
+  const cards = [];
+  for (let i = 0; i < totalCards; i++) {
+    cards.push(
+      <Col key={i}>
+        <Row>
+          <Card
+            className="mb-4"
+            style={{
+              backgroundColor: "#F5F5F5",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+            }}
+          >
+            <Card.Body>
+              <Link to={"/details"}>
+                <Card.Img
+                  src={img}
+                  style={{
+                    backgroundColor: "#F5F5F5",
+                    borderRadius: "10px",
+                    boxShadow: "0px 0px 10px #888888",
+                  }}
+                ></Card.Img>
+              </Link>
+              <Card.Title className="mt-2 ml-1">Workout {i + 1}</Card.Title>
+              <Card.Text className="ml-1">Short description</Card.Text>
+              <Card.Text className="ml-1">
+                <AiFillLike size={30} /> <AiFillHeart size={30} />
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Row>
+      </Col>
+    );
+  }
+
+  const cardsToShow = cards.slice(startIndex, endIndex);
+
+  const paginationItems = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paginationItems.push(
+      <Pagination.Item
+        activeLabel=""
+        key={i}
+        active={i === activePage}
+        onClick={() => handlePageChange(i)}
+      >
+        {i}
+      </Pagination.Item>
+    );
+  }
+
+  return (
+    <>
+      <MyNav />
+      <Container className="pad">
+        <Row className="d-flex justify-content-center align-items-center">
+          <Col
+            xl={6}
+            lg={12}
+            className="p-5"
+            style={{
+              backgroundColor: "#F5F5F5",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+              minHeight: "20rem",
+            }}
+          >
+            <h2 className="pb-2">Find your ideal workout routine!</h2>
+            <p style={{ fontSize: "1.3rem" }}>
+              Our team of dedicated trainers with help of other users present u
+              our best exercises! Here you will find workout's for all your
+              needs! Feel free to add those u find interesting to your personal
+              calendar and enjoy your own personalized training routine!
+              <span style={{ fontWeight: "bold" }}>
+                {" "}
+                Keep up the warrior mentality!
+              </span>
+            </p>
+          </Col>
+          <Col xl={6} lg={12} className="kek p-0">
+            <div
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                backgroundColor: "#F5F5F5",
+                boxShadow: "0px 0px 10px #888888",
+                maxHeight: "22rem",
+              }}
+            >
+              <Image
+                src="https://thumbs.dreamstime.com/b/diverse-group-friends-laughing-workout-session-sportswear-standing-arm-together-gym-class-149716233.jpg"
+                alt="Right Image"
+                fluid
+                style={{
+                  border: "10px solid #F5F5F5",
+                  borderLeft: "0px",
+                  borderRadius: "0px 20px 20px 0px",
+                  width: "100%",
+                }}
+              />
+            </div>
+          </Col>
+          <Row
+            className="mt-5"
+            style={{
+              backgroundColor: "#F5F5F5",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+            }}
+          >
+            <Form
+              className="d-flex"
+              style={{
+                width: "40rem",
+                backgroundColor: "#F5F5F5",
+                borderRadius: "10px",
+                boxShadow: "0px 0px 10px #888888",
+              }}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2 "
+                aria-label="Search"
+                size="lg"
+              />
+              <Button
+                variant="outline-dark"
+                style={{
+                  width: "4rem",
+                  borderLeft: "",
+                  borderRadius: "0px 10px 10px 0px",
+                  height: "3rem",
+                }}
+              >
+                <BsSearch style={{}} size={20} />
+              </Button>
+            </Form>
+          </Row>
+        </Row>
+      </Container>
+
+      <Container
+        fluid
+        className="bg-dark mt-4 d-flex justify-content-center"
+        style={{ color: "white" }}
+      ></Container>
+      <Container className="mt-5">
+        <Row>{cardsToShow.slice(0, 2)}</Row>
+        <Row>{cardsToShow.slice(2, 4)}</Row>
+        <Row>{cardsToShow.slice(4, 6)}</Row>
+        <Row>{cardsToShow.slice(6, 8)}</Row>
+        <Row className=" justify-content-center">
+          <Col className="py-2 d-flex justify-content-center">
+            <Pagination
+              size="lg"
+              className="rounded pt-3 px-3"
+              style={{
+                backgroundColor: "#F5F5F5",
+                borderRadius: "10px",
+                boxShadow: "0px 0px 10px #888888",
+              }}
+            >
+              {paginationItems}
+            </Pagination>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
+
+export default MyComponent;

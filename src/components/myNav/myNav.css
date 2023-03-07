@@ -1,0 +1,18 @@
+.tbc {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.tbc:hover {
+  text-shadow: 1px 1px #1d252d;
+}
+.nov {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+.pad {
+  padding-top: 5.5rem;
+}
+.pade {
+  padding-top: 3rem;
+}

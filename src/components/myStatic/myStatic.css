@@ -1,0 +1,12 @@
+@media only screen and (max-width: 1200px) {
+  .bd {
+    display: none;
+  }
+}
+li {
+  margin-bottom: 1rem;
+}
+.text-left {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
