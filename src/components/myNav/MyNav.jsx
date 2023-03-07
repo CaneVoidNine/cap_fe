@@ -28,7 +28,7 @@ export default function MyNav() {
           <Nav className="mr-auto">
             <Nav.Link
               className="tbc"
-              href="/"
+              href="/home"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Home
@@ -42,14 +42,14 @@ export default function MyNav() {
             </Nav.Link>
             <Nav.Link
               className="tbc"
-              href="/"
+              href="/home"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Guides
             </Nav.Link>
             <Nav.Link
               className="tbc"
-              href="/"
+              href="/home"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Collections
@@ -58,7 +58,7 @@ export default function MyNav() {
           <Nav>
             <Nav.Link
               className="tbc"
-              href="/"
+              href="/home"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Community
@@ -83,7 +83,7 @@ export default function MyNav() {
               >
                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
 
-                <Dropdown.Item href="/">Settings</Dropdown.Item>
+                <Dropdown.Item href="/home">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item href="/logister">Logout</Dropdown.Item>
               </Dropdown.Menu>

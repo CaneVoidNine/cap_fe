@@ -5,63 +5,55 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import {
+  fetchWorkoutsAction,
+  getUserAction,
+  saveTokenAction,
+} from "../../redux/actions";
 export default function MyLogister() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      navigate("/");
-    }
-  }, []);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const [token, setToken] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [isLogin, setIsLogin] = useState(true);
-
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleLogin = async () => {
-    const details = {
-      email: email,
-      password: password,
-    };
-
-    const options = {
-      method: "POST",
-      body: JSON.stringify(details),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const fetchURL = "http://localhost:3001/users/login";
-
-    try {
-      let response = await fetch(fetchURL, options);
-
-      if (response.ok) {
-        const data = await response.json();
-
-        console.log(response.status);
-        localStorage.setItem("accessToken", data.accessToken);
-        navigate("/");
-      } else {
-        console.log(response.status);
-      }
-    } catch (error) {}
-  };
 
   const handleSwitch = () => {
     setIsLogin(!isLogin);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // handle login/register logic here
+    const logIn = { email: email, password: password };
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(logIn),
+      };
+      const response = await fetch(
+        `http://localhost:3002/users/login`,
+        options
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setToken(data.accessToken);
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    dispatch(saveTokenAction(token));
+    dispatch(fetchWorkoutsAction(token));
+    dispatch(getUserAction(token));
+  }, [token]);
 
   return (
     <div className="center">
@@ -87,8 +79,7 @@ export default function MyLogister() {
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  value={email}
-                  onChange={(event) => handleEmail(event)}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="Enter email"
                   required
@@ -100,7 +91,7 @@ export default function MyLogister() {
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
-                  onChange={(event) => handlePassword(event)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </Form.Group>
@@ -124,7 +115,7 @@ export default function MyLogister() {
                 }}
                 variant="primary"
                 type="submit"
-                onClick={handleLogin}
+                onClick={(e) => handleSubmit(e)}
               >
                 {isLogin ? "Login" : "Register"}
               </Button>

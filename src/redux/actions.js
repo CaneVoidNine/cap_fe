@@ -1,54 +1,60 @@
-import axios from "axios";
+export const SAVE_USER = "SAVE USER";
+export const SAVE_USERS = "SAVE USERS";
 
-export const SET_USER_INFO = "SET_USER_INFO";
-
-export const CHECK_AUTHENTICATION = "CHECK_AUTHENTICATION";
 export const SAVE_TOKEN = "SAVE_TOKEN";
-export const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
+export const FETCH_WORK = "FETCH_WORK";
 
-export const fetchUserDetails = () => {
-  return async (dispatch) => {
-    const optionsGet = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-    };
+const apiUrl = process.env.BE_URL;
+
+export const saveUserAction = (user) => {
+  return {
+    type: SAVE_USER,
+    payload: user,
+  };
+};
+
+export const getUserAction = (accessToken) => {
+  return async (dispatch, getstate) => {
     try {
-      const response = await fetch(
-        "http://localhost:3001/users/me",
-        optionsGet
-      );
-
+      const fetchMenuOptions = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const response = await fetch(`${apiUrl}/users/`, fetchMenuOptions);
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        dispatch({ type: SET_USER_INFO, payload: data }); // dispatch the action to update the user info in the state
-      } else {
-        throw new Error("Network response was not ok.");
+        const fetchedData = await response.json();
+        dispatch({ type: SAVE_USERS, payload: fetchedData });
+        saveTokenAction(fetchedData.accessToken);
       }
     } catch (error) {
-      dispatch({ type: "FETCH_USER_FAILURE", payload: error });
+      console.log(error);
     }
   };
 };
 
-export const updateUserDetails = (userId, updatedDetails, token) => {
-  return async (dispatch) => {
+export const saveTokenAction = (token) => {
+  return {
+    type: SAVE_TOKEN,
+    payload: token,
+  };
+};
+
+export const fetchWorkoutsAction = (accessToken) => {
+  return async (dispatch, getstate) => {
     try {
-      console.log("Request body:", JSON.stringify(updatedDetails));
-      const { data } = await axios.put(
-        `http://localhost:3001/users/me`,
-        updatedDetails,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch({ type: UPDATE_USER_DETAILS, payload: data });
+      const fetchWorkoutsOptions = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const response = await fetch(`${apiUrl}/dishes`, fetchWorkoutsOptions);
+      if (response.ok) {
+        const fetchedData = await response.json();
+        dispatch({ type: FETCH_WORK, payload: fetchedData });
+      }
     } catch (error) {
       console.log(error);
     }

@@ -1,15 +1,13 @@
-import { SET_USER_INFO, UPDATE_USER_DETAILS } from "./actions";
+import { FETCH_WORK } from "./actions";
 
 const initialState = {
-  userInfo: {},
+  workouts: [],
 };
 
 const workReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER_INFO:
-      return { ...state, userInfo: action.payload };
-    case UPDATE_USER_DETAILS:
-      return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
+    case FETCH_WORK:
+      return { state, workouts: action.payload };
     default:
       return state;
   }
