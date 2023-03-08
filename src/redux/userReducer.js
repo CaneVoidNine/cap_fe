@@ -2,7 +2,7 @@ import { SAVE_TOKEN, SAVE_USER, SAVE_USERS } from "./actions";
 
 const initialState = {
   users: [],
-  user: {},
+  user: [],
   accessToken: "",
 };
 

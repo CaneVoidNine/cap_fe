@@ -9,6 +9,7 @@ import {
   fetchWorkoutsAction,
   getUserAction,
   saveTokenAction,
+  saveUserAction,
 } from "../../redux/actions";
 export default function MyLogister() {
   const navigate = useNavigate();
@@ -39,7 +40,10 @@ export default function MyLogister() {
       );
       if (response.ok) {
         const data = await response.json();
+
         setToken(data.accessToken);
+
+        console.log(data.accessToken);
         setTimeout(() => {
           navigate("/home");
         }, 1000);
@@ -51,7 +55,6 @@ export default function MyLogister() {
 
   useEffect(() => {
     dispatch(saveTokenAction(token));
-    dispatch(fetchWorkoutsAction(token));
     dispatch(getUserAction(token));
   }, [token]);
 

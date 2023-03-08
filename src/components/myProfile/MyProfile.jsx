@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import MyCalendar from "../myCalendar/MyCalendar";
 import MyNav from "../myNav/MyNav";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWorkoutsAction, saveUserAction } from "../../redux/actions";
+import { useSSRSafeId } from "@react-aria/ssr";
 export default function MyProfile() {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("John Doe");
@@ -19,6 +21,8 @@ export default function MyProfile() {
     // Handle saving changes here
     handleCloseModal();
   };
+
+  const myProfile = useSelector((state) => state.user.user);
   return (
     <>
       <MyNav />
@@ -39,7 +43,7 @@ export default function MyProfile() {
             <Row>
               <Col className="d-flex justify-content-around">
                 <img
-                  src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+                  src={myProfile?.avatar}
                   alt="..."
                   style={{
                     width: "19rem",
@@ -48,9 +52,9 @@ export default function MyProfile() {
                 ></img>
               </Col>
               <Col className="mt-5 ml-5">
-                <p>Username: {name}</p>
-                <p>Email: {email}</p>
-                <p>Phone number: {phone}</p>
+                <p>Firstname: {myProfile?.name}</p>
+                <p>Lastname: {myProfile?.lastName}</p>
+                <p>Email: {myProfile?.email}</p>
                 <Button variant="primary" onClick={handleShowModal}>
                   Edit Information
                 </Button>
