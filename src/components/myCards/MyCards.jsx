@@ -47,7 +47,7 @@ export default function MyCards() {
           <Row>
             <Col xs={12}>
               <Card className="card2">
-                <Link to="/details">
+                <Link to={`/details/${myWork[1]?._id}`}>
                   <Card.Img
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -56,7 +56,7 @@ export default function MyCards() {
                       height: "15rem",
                     }}
                     variant="top"
-                    src={img2}
+                    src={myWork[1]?.image}
                     alt="Image 2"
                   />
                 </Link>
@@ -65,7 +65,7 @@ export default function MyCards() {
 
             <Col xs={12}>
               <Card className="card3">
-                <Link to="/details">
+                <Link to={`/details/${myWork[2]?._id}`}>
                   <Card.Img
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -74,7 +74,7 @@ export default function MyCards() {
                       height: "15rem",
                     }}
                     variant="top"
-                    src={img4}
+                    src={myWork[2]?.image}
                     alt="Image 3"
                   />
                 </Link>

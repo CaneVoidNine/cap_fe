@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
 import {
   Form,
@@ -14,8 +14,15 @@ import PageItem from "react-bootstrap/PageItem";
 import "./myWork.css";
 import MyNav from "../myNav/MyNav";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWorkoutsAction } from "../../redux/actions";
 function MyComponent(props) {
   const [activePage, setActivePage] = useState(1);
+  const dispatch = useDispatch();
+  const myWork = useSelector((state) => state.work.workouts);
+  useEffect(() => {
+    dispatch(fetchWorkoutsAction());
+  }, []);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -27,41 +34,39 @@ function MyComponent(props) {
   const startIndex = (activePage - 1) * cardsPerPage;
   const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
 
-  const cards = [];
-  for (let i = 0; i < totalCards; i++) {
-    cards.push(
-      <Col key={i}>
-        <Row>
-          <Card
-            className="mb-4"
-            style={{
-              backgroundColor: "#F5F5F5",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
-            }}
-          >
-            <Card.Body>
-              <Link to={"/details"}>
-                <Card.Img
-                  src={img}
-                  style={{
-                    backgroundColor: "#F5F5F5",
-                    borderRadius: "10px",
-                    boxShadow: "0px 0px 10px #888888",
-                  }}
-                ></Card.Img>
-              </Link>
-              <Card.Title className="mt-2 ml-1">Workout {i + 1}</Card.Title>
-              <Card.Text className="ml-1">Short description</Card.Text>
-              <Card.Text className="ml-1">
-                <AiFillLike size={30} /> <AiFillHeart size={30} />
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Row>
-      </Col>
-    );
-  }
+  const cards = myWork.map((workout, i) => (
+    <Col key={i}>
+      <Row>
+        <Card
+          className="mb-4"
+          style={{
+            backgroundColor: "#F5F5F5",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px #888888",
+            minHeight: "50rem",
+          }}
+        >
+          <Card.Body>
+            <Link to={`/details/${myWork[i]?._id}`}>
+              <Card.Img
+                src={myWork[i]?.image}
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 10px #888888",
+                }}
+              ></Card.Img>
+            </Link>
+            <Card.Title className="mt-2 ml-1">{myWork[i]?.title}</Card.Title>
+            <Card.Text className="ml-1">{myWork[i]?.info}</Card.Text>
+            <Card.Text className="ml-1">
+              <AiFillLike size={30} /> <AiFillHeart size={30} />
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Row>
+    </Col>
+  ));
 
   const cardsToShow = cards.slice(startIndex, endIndex);
 

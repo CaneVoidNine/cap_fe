@@ -33,6 +33,7 @@ function CustomToggle({ children, eventKey, callback }) {
     </div>
   );
 }
+
 export default function MyDetails() {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
@@ -55,6 +56,7 @@ export default function MyDetails() {
     console.log(id);
     console.log(movie);
   }, []);
+
   return (
     <>
       <MyNav />
@@ -117,7 +119,6 @@ export default function MyDetails() {
               </Card>
             </Accordion>
           </Row>
-
           <Row
             className="p-4 my-2 mx-1"
             style={{
@@ -137,12 +138,7 @@ export default function MyDetails() {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-
-            {/* <Col className=" d-flex justify-content-start">
-              <h2>Exercise 2</h2>
-            </Col> */}
           </Row>
-
           <Row
             className="p-4 my-2 mx-1"
             style={{
