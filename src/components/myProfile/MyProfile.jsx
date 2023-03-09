@@ -35,27 +35,50 @@ export default function MyProfile() {
             boxShadow: "0px 0px 10px #888888",
           }}
         >
+          <Row
+            className="d-flex justify-content-center"
+            style={{
+              width: "100%",
+              marginInline: "0",
+              backgroundColor: "#F5F5F5",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+            }}
+          >
+            <Col className="py-2 d-flex justify-content-center">
+              <h2>Profile Information</h2>
+            </Col>
+          </Row>
+
           <Col>
-            <h1 className="mb-4 pt-2 d-flex justify-content-center">
-              Profile Information
-            </h1>
-            <hr />
             <Row>
-              <Col className="d-flex justify-content-around">
+              <Col
+                style={{
+                  width: "20rem",
+                }}
+                className="p-4 m-4 d-flex justify-content-center"
+              >
                 <img
                   src={myProfile?.avatar}
                   alt="..."
                   style={{
                     width: "19rem",
                     height: "16rem",
+                    backgroundColor: "#F5F5F5",
+                    borderRadius: "10px",
+                    boxShadow: "0px 0px 10px #888888",
                   }}
                 ></img>
               </Col>
-              <Col className="mt-5 ml-5">
-                <p>Firstname: {myProfile?.name}</p>
-                <p>Lastname: {myProfile?.lastName}</p>
-                <p>Email: {myProfile?.email}</p>
-                <Button variant="primary" onClick={handleShowModal}>
+              <Col className="pt-5">
+                <h3>Firstname: {myProfile?.name}</h3>
+                <h3 className="mt-5">Lastname: {myProfile?.lastName}</h3>
+                <h3 className="mt-5">Email: {myProfile?.email}</h3>
+                <Button
+                  className="mt-4"
+                  variant="primary"
+                  onClick={handleShowModal}
+                >
                   Edit Information
                 </Button>
               </Col>

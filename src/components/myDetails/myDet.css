@@ -1,0 +1,15 @@
+.accordion-button,
+.accordion-button:focus,
+.accordion-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+
+  border: 0 !important;
+  color: black !important;
+}
+.accordion-post-group {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  color: black !important;
+}

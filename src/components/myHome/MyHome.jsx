@@ -4,12 +4,9 @@ import MyFoot from "../myFoot/MyFoot";
 import MyJumbo from "../myJumbo/MyJumbo";
 import MyNav from "../myNav/MyNav";
 import MyStatic from "../myStatic/MyStatic";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchWorkoutsAction } from "../../redux/actions";
 export default function MyHome() {
-  const myProfile = useSelector((state) => state.user.user);
-  useEffect(() => {
-    console.log(myProfile);
-  });
   return (
     <>
       <MyNav />

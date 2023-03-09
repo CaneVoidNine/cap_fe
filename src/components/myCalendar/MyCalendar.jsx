@@ -21,17 +21,32 @@ export default function MyCalendar() {
     <>
       <MyNav />
       <Container
-        className="mt-4 p-4"
+        className="mt-4 pb-4"
         style={{
           backgroundColor: "#F5F5F5",
+          paddingInline: "0",
           borderRadius: "10px",
           boxShadow: "0px 0px 10px #888888",
         }}
       >
-        <Row></Row>
-        <Row>
+        <Row
+          className="mb-4"
+          style={{
+            width: "100%",
+
+            marginInline: "0",
+            paddingInline: "0",
+            backgroundColor: "#F5F5F5",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px #888888",
+          }}
+        >
+          <Col className="py-2 d-flex justify-content-center">
+            <h2>Calendar</h2>
+          </Col>
+        </Row>
+        <Row className="px-4">
           <Col md={2}>
-            <h2 className="d-flex justify-content-center">List</h2>
             <ListGroup
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
@@ -42,7 +57,6 @@ export default function MyCalendar() {
             </ListGroup>
           </Col>
           <Col md={10}>
-            <h2 className="d-flex justify-content-center">Calendar</h2>
             <div style={{ overflowX: "auto", overflowY: "auto" }}>
               <Table striped bordered hover>
                 <thead>

@@ -60,7 +60,10 @@ export const fetchWorkoutsAction = () => {
       const fetchWorkoutsOptions = {
         method: "GET",
       };
-      const response = await fetch(`${apiUrl}/workouts`, fetchWorkoutsOptions);
+      const response = await fetch(
+        `http://localhost:3002/workouts`,
+        fetchWorkoutsOptions
+      );
       if (response.ok) {
         const workouts = await response.json();
         dispatch({ type: FETCH_WORK, payload: workouts });

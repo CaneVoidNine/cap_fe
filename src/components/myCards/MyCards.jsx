@@ -9,18 +9,28 @@ import img3 from "../../assets/february27.jpg";
 import img4 from "../../assets/february2023.gif";
 import img5 from "../../assets/february27.gif";
 import { Link } from "react-router-dom";
-
+import { fetchWorkoutsAction } from "../../redux/actions";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 export default function MyCards() {
+  const dispatch = useDispatch();
+  const myWork = useSelector((state) => state.work.workouts);
+  const myProfile = useSelector((state) => state.user.user);
+  useEffect(() => {
+    dispatch(fetchWorkoutsAction());
+    console.log(myProfile);
+    console.log(myWork);
+  }, []);
   return (
     <Container className="mb-4">
       <h2 className="mb-2">Trending </h2>
       <Row className="mb-4">
         <Col xs={12} md={6}>
           <Card className="card1">
-            <Link to="/details">
+            <Link to={`/details/${myWork[0]?._id}`}>
               <Card.Img
                 variant="top"
-                src={img5}
+                src={myWork[0]?.image}
                 alt="Image 1"
                 style={{
                   backgroundColor: "#F5F5F5",

@@ -118,14 +118,15 @@ function MyComponent(props) {
               }}
             >
               <Image
+                className=""
                 src="https://thumbs.dreamstime.com/b/diverse-group-friends-laughing-workout-session-sportswear-standing-arm-together-gym-class-149716233.jpg"
                 alt="Right Image"
-                fluid
                 style={{
                   border: "10px solid #F5F5F5",
                   borderLeft: "0px",
                   borderRadius: "0px 20px 20px 0px",
                   width: "100%",
+                  height: "25rem",
                 }}
               />
             </div>
