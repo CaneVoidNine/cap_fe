@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "./myLogister.css";
-import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -10,48 +10,7 @@ import {
   saveTokenAction,
   saveUserAction,
 } from "../../redux/actions";
-export default function MyLogister() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [token, setToken] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const logIn = { email: email, password: password };
-    try {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(logIn),
-      };
-      const response = await fetch(
-        `http://localhost:3002/users/login`,
-        options
-      );
-      if (response.ok) {
-        const data = await response.json();
-
-        setToken(data.accessToken);
-
-        console.log(data.accessToken);
-        setTimeout(() => {
-          navigate("/home");
-        }, 1000);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    dispatch(saveTokenAction(token));
-    dispatch(getUserAction(token));
-  }, [token]);
-
+export default function MyRegi() {
   return (
     <div className="center">
       <Container
@@ -64,19 +23,37 @@ export default function MyLogister() {
       >
         <Row className="p-5 d-flex justify-content-md-center">
           <Col xs={12} md={6}>
-            <h2>Login</h2>
+            <h2>Register</h2>
             <Form
               style={{
                 padding: "1rem",
                 fontFamily: "Open Sans, sans serif",
                 fontSize: "16px",
               }}
-              onSubmit={handleSubmit}
+              //   onSubmit={handleSubmit}
             >
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  //   onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Your name"
+                  required
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  //   onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Your last name"
+                  required
+                />
+              </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  onChange={(e) => setEmail(e.target.value)}
+                  //   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="Enter email"
                   required
@@ -88,7 +65,7 @@ export default function MyLogister() {
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  //   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </Form.Group>
@@ -101,13 +78,13 @@ export default function MyLogister() {
                 }}
                 variant="primary"
                 type="submit"
-                onClick={(e) => handleSubmit(e)}
+                // onClick={(e) => handleSubmit(e)}
               >
                 Login
               </Button>
-              <Link to={"/register"}>
+              <Link to={"/"}>
                 <Button className="mt-2" variant="link">
-                  Create an account
+                  Already have an account?
                 </Button>
               </Link>
             </Form>
