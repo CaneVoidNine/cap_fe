@@ -1,10 +1,14 @@
 import React from "react";
 import { Container, Table, Row, Col, ListGroup } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
+import { useState } from "react";
 
 const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
 export default function MyCalendar() {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [calendarEntries, setCalendarEntries] = useState([]);
+
   const days = [
     "Monday",
     "Tuesday",
@@ -52,7 +56,14 @@ export default function MyCalendar() {
               vertical
             >
               {items.map((item) => (
-                <ListGroup.Item key={item}>{item}</ListGroup.Item>
+                <ListGroup.Item
+                  key={item}
+                  onClick={() => setSelectedItem(item)}
+                  active={selectedItem === item}
+                  style={{ cursor: "pointer" }}
+                >
+                  {item}
+                </ListGroup.Item>
               ))}
             </ListGroup>
           </Col>
@@ -72,7 +83,23 @@ export default function MyCalendar() {
                     <tr key={day}>
                       <td>{day}</td>
                       {hours.map((hour) => (
-                        <td key={`${day}-${hour}`}></td>
+                        <td
+                          key={`${day}-${hour}`}
+                          onClick={() =>
+                            setCalendarEntries([
+                              ...calendarEntries,
+                              { day, hour, item: selectedItem },
+                            ])
+                          }
+                        >
+                          {calendarEntries
+                            .filter(
+                              (entry) =>
+                                entry.day === day && entry.hour === hour
+                            )
+                            .map((entry) => entry.item)
+                            .join(", ")}
+                        </td>
                       ))}
                     </tr>
                   ))}

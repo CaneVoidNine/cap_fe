@@ -11,6 +11,7 @@ import MyProfile from "./components/myProfile/MyProfile";
 import MyCalendar from "./components/myCalendar/MyCalendar";
 import MyLogister from "./components/myLogister/MyLogister";
 import MyRegi from "./components/myRegi/MyRegi";
+import MyAdd from "./components/myAdd/MyAdd";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/workouts" element={<MyWork />} />
         <Route path="/details/:id" element={<MyDetails />} />
         <Route path="/profile" element={<MyProfile />} />
-
+        <Route path="/add" element={<MyAdd />} />
         <Route path="/home" element={<MyHome />} />
       </Routes>
     </Router>
@@ -29,10 +30,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <Container>
-      <MyNav />
-      <MyFoot />
-    </Container> */
-}

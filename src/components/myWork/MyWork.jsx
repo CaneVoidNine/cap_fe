@@ -137,9 +137,10 @@ function MyComponent(props) {
             </div>
           </Col>
           <Row
-            className="mt-5"
+            className="mt-5 p-3"
             style={{
               backgroundColor: "#F5F5F5",
+
               borderRadius: "10px",
               boxShadow: "0px 0px 10px #888888",
             }}
@@ -172,6 +173,15 @@ function MyComponent(props) {
                 <BsSearch style={{}} size={20} />
               </Button>
             </Form>
+            <Link to={"/add"}>
+              <Button
+                className="ml-2"
+                variant="outline-dark"
+                style={{ height: "100%" }}
+              >
+                Add
+              </Button>
+            </Link>
           </Row>
         </Row>
       </Container>

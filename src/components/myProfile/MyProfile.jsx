@@ -8,15 +8,13 @@ import { fetchWorkoutsAction, saveUserAction } from "../../redux/actions";
 import { useSSRSafeId } from "@react-aria/ssr";
 export default function MyProfile() {
   const [showModal, setShowModal] = useState(false);
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("johndoe@example.com");
-  const [phone, setPhone] = useState("555-555-5555");
+  const [name, setName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePhoneChange = (e) => setPhone(e.target.value);
+
   const handleSaveChanges = () => {
     // Handle saving changes here
     handleCloseModal();
@@ -94,27 +92,15 @@ export default function MyProfile() {
             <Form>
               <Form.Group>
                 <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={name}
-                  onChange={handleNameChange}
-                />
+                <Form.Control type="text" value={name} />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
+                <Form.Control type="email" value={email} />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Phone</Form.Label>
-                <Form.Control
-                  type="tel"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                />
+                <Form.Control type="tel" />
               </Form.Group>
             </Form>
           </Modal.Body>
