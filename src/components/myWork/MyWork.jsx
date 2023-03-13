@@ -16,8 +16,10 @@ import MyNav from "../myNav/MyNav";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWorkoutsAction } from "../../redux/actions";
+
 function MyComponent(props) {
   const [activePage, setActivePage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const myWork = useSelector((state) => state.work.workouts);
 
@@ -29,13 +31,21 @@ function MyComponent(props) {
     setActivePage(pageNumber);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const cardsPerPage = 8;
   const totalCards = 32;
   const totalPages = Math.ceil(totalCards / cardsPerPage);
   const startIndex = (activePage - 1) * cardsPerPage;
   const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
 
-  const cards = myWork.map((workout, i) => (
+  const filteredCards = myWork.filter((card) =>
+    card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const cards = filteredCards.map((workout, i) => (
     <Col key={i}>
       <Row>
         <Card
@@ -48,9 +58,9 @@ function MyComponent(props) {
           }}
         >
           <Card.Body>
-            <Link to={`/details/${myWork[i]?._id}`}>
+            <Link to={`/details/${filteredCards[i]?._id}`}>
               <Card.Img
-                src={myWork[i]?.image}
+                src={filteredCards[i]?.image}
                 style={{
                   backgroundColor: "#F5F5F5",
                   borderRadius: "10px",
@@ -58,8 +68,10 @@ function MyComponent(props) {
                 }}
               ></Card.Img>
             </Link>
-            <Card.Title className="mt-2 ml-1">{myWork[i]?.title}</Card.Title>
-            <Card.Text className="ml-1">{myWork[i]?.info}</Card.Text>
+            <Card.Title className="mt-2 ml-1">
+              {filteredCards[i]?.title}
+            </Card.Title>
+            <Card.Text className="ml-1">{filteredCards[i]?.info}</Card.Text>
             <Card.Text className="ml-1">
               <AiFillLike size={30} /> <AiFillHeart size={30} />
             </Card.Text>
@@ -161,6 +173,7 @@ function MyComponent(props) {
                 className="me-2 "
                 aria-label="Search"
                 size="lg"
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Button
                 variant="outline-dark"
