@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./myDet.css";
 import {
+  Button,
   Container,
   Row,
   Col,
@@ -9,7 +10,7 @@ import {
   AccordionContext,
 } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import MyNav from "../myNav/MyNav";
 import { MdOutlineExpandLess, MdOutlineExpandMore } from "react-icons/md";
@@ -18,6 +19,7 @@ import { useContext } from "react";
 function CustomToggle({ children, eventKey, callback }) {
   const [changeIcon, setChangeIcon] = useState(false);
   const { activeEventKey } = useContext(AccordionContext);
+
   const decoratedOnClick = useAccordionButton(
     eventKey,
     () => callback && callback(eventKey)
@@ -35,8 +37,30 @@ function CustomToggle({ children, eventKey, callback }) {
 }
 
 export default function MyDetails() {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const { id } = useParams();
+
+  const handleDelete = async (e) => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await fetch(
+        `http://localhost:3002/workouts/${id}`,
+        options
+      );
+      if (response.ok) {
+        navigate("/workouts");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getDetail = async () => {
     try {
       const response = await fetch(`http://localhost:3002/workouts/${id}`);
@@ -75,6 +99,11 @@ export default function MyDetails() {
               maxHeight: "25rem",
             }}
           ></Image>
+        </Row>
+        <Row className="d-flex justify-content-end mr-3">
+          <Button onClick={handleDelete} variant="danger">
+            Delete
+          </Button>
         </Row>
         <Container
           className="mt-3 pb-3"
@@ -159,6 +188,7 @@ export default function MyDetails() {
               </Card>
             </Accordion>
           </Row>
+
           <Row className="mt-2 d-flex justify-content-around">
             <Col md={6} className="mt-2 d-flex justify-content-around">
               Timer

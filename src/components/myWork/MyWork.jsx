@@ -20,6 +20,7 @@ function MyComponent(props) {
   const [activePage, setActivePage] = useState(1);
   const dispatch = useDispatch();
   const myWork = useSelector((state) => state.work.workouts);
+
   useEffect(() => {
     dispatch(fetchWorkoutsAction());
   }, []);
