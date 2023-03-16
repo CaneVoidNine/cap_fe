@@ -35,8 +35,8 @@ function MyComponent(props) {
     setSearchTerm(e.target.value);
   };
 
-  const cardsPerPage = 8;
-  const totalCards = 32;
+  const cardsPerPage = 4;
+  const totalCards = 16;
   const totalPages = Math.ceil(totalCards / cardsPerPage);
   const startIndex = (activePage - 1) * cardsPerPage;
   const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
@@ -54,7 +54,9 @@ function MyComponent(props) {
             backgroundColor: "#F5F5F5",
             borderRadius: "10px",
             boxShadow: "0px 0px 10px #888888",
-            minHeight: "50rem",
+            height: "50rem",
+            overflowY: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           <Card.Body>

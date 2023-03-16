@@ -116,22 +116,32 @@ export default function MyAdd() {
     <>
       <MyNav />
       <div className="center">
-        <Container
-          className=""
-          style={{
-            backgroundColor: "#F5F5F5",
-            borderRadius: "10px",
-            boxShadow: "0px 0px 10px #888888",
-          }}
-        >
-          <Row className="p-5 d-flex justify-content-md-center">
+        <Container>
+          <Row className="px-5 pb-5 d-flex justify-content-md-center">
             <Col xs={12} md={6}>
-              <h2>Add new Workout!</h2>
-              <Form
+              <Row
+                className="d-flex justify-content-center"
                 style={{
-                  padding: "1rem",
+                  width: "100%",
+                  marginInline: "0",
+                  backgroundColor: "#F5F5F5",
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 10px #888888",
+                }}
+              >
+                <Col className="py-2 d-flex justify-content-center">
+                  <h2>Add New Workout!</h2>
+                </Col>
+              </Row>
+              <Form
+                className="p-4"
+                style={{
                   fontFamily: "Open Sans, sans serif",
                   fontSize: "16px",
+                  backgroundColor: "#F5F5F5",
+
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 5px #888888",
                 }}
                 onSubmit={handleSubmit}
               >
@@ -150,6 +160,8 @@ export default function MyAdd() {
                     onChange={(e) => setInfo(e.target.value)}
                     type="text"
                     placeholder="Info about workout"
+                    size="lg"
+                    column="true"
                     required
                   />
                 </Form.Group>

@@ -1,6 +1,6 @@
 export const SAVE_USER = "SAVE USER";
 export const SAVE_USERS = "SAVE USERS";
-
+export const LIKE_WORK = "LIKE_WORK";
 export const SAVE_TOKEN = "SAVE_TOKEN";
 export const FETCH_WORK = "FETCH_WORK";
 // export const SAVE_WORK = "SAVE_WORK";
@@ -12,6 +12,13 @@ const apiUrl = process.env.BE_URL;
 //     payload: workout,
 //   };
 // };
+
+export const likeWorkAction = (likes) => {
+  return {
+    type: LIKE_WORK,
+    payload: likes,
+  };
+};
 
 export const saveUserAction = (user) => {
   return {
