@@ -40,7 +40,7 @@ export default function MyLogister() {
         console.log(data.accessToken);
         dispatch(saveTokenAction(data.accessToken));
         setTimeout(() => {
-          navigate("/home");
+          navigate("/");
         }, 1000);
       }
     } catch (error) {

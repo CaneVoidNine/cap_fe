@@ -81,6 +81,34 @@ export default function MyDetails() {
     console.log(movie);
   }, []);
 
+  const exe =
+    movie && movie.exercises
+      ? movie.exercises.map((exercise, i) => {
+          return (
+            <Row
+              className="p-4 my-2 mx-1"
+              style={{
+                backgroundColor: "#F5F5F5",
+                borderRadius: "10px",
+                boxShadow: "0px 0px 10px #888888",
+              }}
+            >
+              <Accordion>
+                <Card className="accordion-post-group">
+                  <Card.Header className="d-flex justify-content-between align-items-center">
+                    <h2>Exercise {i + 1}</h2>
+                    <CustomToggle eventKey="1"></CustomToggle>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="1">
+                    <div className="py-3">{exercise?.title}</div>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+            </Row>
+          );
+        })
+      : null;
+
   return (
     <>
       <MyNav />
@@ -125,78 +153,7 @@ export default function MyDetails() {
               <p style={{ fontSize: "1.3rem" }}>{movie?.info}</p>
             </Col>
           </Row>
-
-          <Row
-            className="p-4 my-2 mx-1"
-            style={{
-              backgroundColor: "#F5F5F5",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
-            }}
-          >
-            <Accordion>
-              <Card className="accordion-post-group">
-                <Card.Header className="d-flex justify-content-between align-items-center">
-                  <h2>Exercise 1</h2>
-                  <CustomToggle eventKey="1"></CustomToggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="1">
-                  <div className="py-3">
-                    Exercise info here Exercise info here Exercise info here
-                  </div>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          </Row>
-          <Row
-            className="p-4 my-2 mx-1"
-            style={{
-              backgroundColor: "#F5F5F5",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
-            }}
-          >
-            <Accordion>
-              <Card className="accordion-post-group">
-                <Card.Header className="d-flex justify-content-between align-items-center">
-                  <h2>Exercise 2</h2>
-                  <CustomToggle eventKey="1"></CustomToggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="1">
-                  <div>Exercise info here</div>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          </Row>
-          <Row
-            className="p-4 my-2 mx-1"
-            style={{
-              backgroundColor: "#F5F5F5",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
-            }}
-          >
-            <Accordion>
-              <Card className="accordion-post-group">
-                <Card.Header className="d-flex justify-content-between align-items-center">
-                  <h2>Exercise 3</h2>
-                  <CustomToggle eventKey="1"></CustomToggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="1">
-                  <div>Exercise info here</div>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          </Row>
-
-          <Row className="mt-2 d-flex justify-content-around">
-            <Col md={6} className="mt-2 d-flex justify-content-around">
-              Timer
-            </Col>
-            <Col md={6} className="mt-2 d-flex justify-content-around">
-              Sets
-            </Col>
-          </Row>
+          {exe}
         </Container>
       </Container>
     </>

@@ -10,14 +10,17 @@ import {
   saveTokenAction,
   saveUserAction,
 } from "../../redux/actions";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 export default function MyAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState();
   const [info, setInfo] = useState();
-  const [selectedOptions, setSelectedOptions] = useState({ 0: "Option 1" });
+  const [selectedOptions, setSelectedOptions] = useState({ 0: "Exercises" });
   const [numDropdowns, setNumDropdowns] = useState(1);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [exe, setExe] = useState([]);
+  const [morb, setMorb] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -28,6 +31,8 @@ export default function MyAdd() {
     // };
     formData.append("title", title);
     formData.append("info", info);
+    // let noDuplicates = [...new Set(morb)];
+    formData.append("exercises", morb);
     try {
       const options = {
         method: "POST",
@@ -61,18 +66,48 @@ export default function MyAdd() {
     setSelectedFile(event.target.files[0]);
   };
 
+  const getExe = async () => {
+    try {
+      const response = await fetch(`http://localhost:3002/exercises`);
+      if (response.ok) {
+        const details = await response.json();
+        setExe(details);
+        console.log(details);
+      } else {
+        console.log("Error fetching!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getExe();
+  }, []);
+  useEffect(() => {
+    console.log(morb);
+  });
+  const axe =
+    exe && exe
+      ? exe.map((exercise, i) => {
+          return (
+            <Dropdown.Item
+              onClick={(e) => setMorb([...morb, exe[i]._id])}
+              eventKey={exe[i].title}
+            >
+              {exe[i].title}
+            </Dropdown.Item>
+          );
+        })
+      : null;
+
   const dropdowns = [];
   for (let i = 0; i < numDropdowns; i++) {
     dropdowns.push(
       <Form.Group controlId={`formDropdown-${i}`} key={i}>
-        <Form.Label>Select an option:</Form.Label>
+        <Form.Label>Select an exerise:</Form.Label>
         <Dropdown onSelect={(eventKey) => handleSelect(eventKey, i)}>
           <Dropdown.Toggle variant="dark">{selectedOptions[i]}</Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item eventKey="Option 1">Option 1</Dropdown.Item>
-            <Dropdown.Item eventKey="Option 2">Option 2</Dropdown.Item>
-            <Dropdown.Item eventKey="Option 3">Option 3</Dropdown.Item>
-          </Dropdown.Menu>
+          <Dropdown.Menu>{axe}</Dropdown.Menu>
         </Dropdown>
       </Form.Group>
     );
@@ -129,7 +164,7 @@ export default function MyAdd() {
                 </Form.Group>
                 <Form>
                   <Form.Group controlId="formNumDropdowns">
-                    <Form.Label>Number of dropdowns:</Form.Label>
+                    <Form.Label>Number of Exercises:</Form.Label>
                     <Form.Control
                       type="number"
                       value={numDropdowns}

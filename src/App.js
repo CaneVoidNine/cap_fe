@@ -17,13 +17,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MyLogister />} />
+        <Route path="/login" element={<MyLogister />} />
         <Route path="/register" element={<MyRegi />} />
         <Route path="/workouts" element={<MyWork />} />
         <Route path="/details/:id" element={<MyDetails />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/add" element={<MyAdd />} />
-        <Route path="/home" element={<MyHome />} />
+        <Route path="/" element={<MyHome />} />
       </Routes>
     </Router>
   );

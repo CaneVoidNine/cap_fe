@@ -31,7 +31,7 @@ export default function MyNav() {
           boxShadow: "0 0 5px rgba(0,0,0,0.3)",
         }}
       >
-        <Navbar.Brand href="/home" style={{ marginRight: "1rem" }}>
+        <Navbar.Brand href="/" style={{ marginRight: "1rem" }}>
           <img
             src="https://as2.ftcdn.net/v2/jpg/03/60/55/21/1000_F_360552123_UlehCaRx80fOT2sI48x0jKYreXL2wTxH.jpg"
             height="30"
@@ -44,11 +44,9 @@ export default function MyNav() {
           <Nav className="mr-auto">
             <Nav.Link
               className="tbc"
-              href="/home"
+              href="/"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
-            >
-              Home
-            </Nav.Link>
+            ></Nav.Link>
             <Nav.Link
               className="tbc"
               href="/workouts"
@@ -58,14 +56,14 @@ export default function MyNav() {
             </Nav.Link>
             <Nav.Link
               className="tbc"
-              href="/home"
+              href="/"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Guides
             </Nav.Link>
             <Nav.Link
               className="tbc"
-              href="/home"
+              href="/"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Collections
@@ -74,7 +72,7 @@ export default function MyNav() {
           <Nav>
             <Nav.Link
               className="tbc"
-              href="/home"
+              href="/"
               style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
             >
               Community
@@ -99,7 +97,7 @@ export default function MyNav() {
               >
                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
 
-                <Dropdown.Item href="/home">Settings</Dropdown.Item>
+                <Dropdown.Item href="/">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={logOut} href="/">
                   Logout

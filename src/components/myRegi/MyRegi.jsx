@@ -40,7 +40,7 @@ export default function MyRegi() {
       );
       if (response.ok) {
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1000);
       }
     } catch (error) {
