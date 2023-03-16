@@ -101,7 +101,7 @@ export default function MyNav() {
 
                 <Dropdown.Item href="/home">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item onClick={logOut()} href="/">
+                <Dropdown.Item onClick={logOut} href="/">
                   Logout
                 </Dropdown.Item>
               </Dropdown.Menu>

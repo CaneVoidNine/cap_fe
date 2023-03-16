@@ -20,12 +20,14 @@ export const saveUserAction = (user) => {
   };
 };
 
-export const getUserAction = (accesstoken) => {
-  return async (dispatch) => {
+export const getUserAction = () => {
+  return async (dispatch, getState) => {
+    const token = getState().user.accessToken;
+
     const optionsGet = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accesstoken}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     try {

@@ -20,17 +20,19 @@ export default function MyAdd() {
   const [selectedFile, setSelectedFile] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const workIn = {
-      title: title,
-      info: info,
-    };
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    // const workIn = {
+    //   title: title,
+    //   info: info,
+    // };
+    formData.append("title", title);
+    formData.append("info", info);
     try {
       const options = {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(workIn),
+
+        body: formData,
       };
       const response = await fetch(`http://localhost:3002/workouts`, options);
       if (response.ok) {
@@ -121,7 +123,7 @@ export default function MyAdd() {
                   <Form.Control
                     style={{ backgroundColor: "#F5F5F5", border: "none" }}
                     type="file"
-                    onChange={handleFileChange}
+                    onChange={(e) => handleFileChange(e)}
                     accept="image/*"
                   />
                 </Form.Group>

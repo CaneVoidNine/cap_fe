@@ -38,6 +38,7 @@ export default function MyLogister() {
         setToken(data.accessToken);
 
         console.log(data.accessToken);
+        dispatch(saveTokenAction(data.accessToken));
         setTimeout(() => {
           navigate("/home");
         }, 1000);
@@ -48,7 +49,6 @@ export default function MyLogister() {
   };
 
   useEffect(() => {
-    dispatch(saveTokenAction(token));
     dispatch(getUserAction(token));
   }, [token]);
 
