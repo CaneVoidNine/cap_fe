@@ -23,21 +23,23 @@ export default function MyNav() {
   const myProfile = useSelector((state) => state.user.user);
   useEffect(() => {});
   return (
-    <Container fluid className="nov">
+    <div fluid className="nov">
       <Navbar
         expand="lg"
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#202124",
           boxShadow: "0 0 5px rgba(0,0,0,0.3)",
+          margin: "0",
         }}
       >
-        <Navbar.Brand href="/" style={{ marginRight: "1rem" }}>
-          <img
+        <Navbar.Brand href="/" style={{ marginLeft: "1rem" }}>
+          <h1 style={{ color: "#C63B45" }}>VoidOuts</h1>
+          {/* <img
             src="https://as2.ftcdn.net/v2/jpg/03/60/55/21/1000_F_360552123_UlehCaRx80fOT2sI48x0jKYreXL2wTxH.jpg"
             height="30"
             className="d-inline-block align-top"
             alt="Logo"
-          />
+          /> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -45,26 +47,41 @@ export default function MyNav() {
             <Nav.Link
               className="tbc"
               href="/"
-              style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
+              style={{
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+              }}
             ></Nav.Link>
             <Nav.Link
               className="tbc"
               href="/workouts"
-              style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
+              style={{
+                color: "white",
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+              }}
             >
               Workouts
             </Nav.Link>
             <Nav.Link
               className="tbc"
               href="/"
-              style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
+              style={{
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+                color: "white",
+              }}
             >
               Guides
             </Nav.Link>
             <Nav.Link
               className="tbc"
               href="/"
-              style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
+              style={{
+                color: "white",
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+              }}
             >
               Collections
             </Nav.Link>
@@ -73,17 +90,22 @@ export default function MyNav() {
             <Nav.Link
               className="tbc"
               href="/"
-              style={{ marginRight: "1rem", fontSize: "1.5rem", color: "#333" }}
+              style={{
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+                color: "white",
+              }}
             >
               Community
             </Nav.Link>
 
             <Dropdown>
-              <Dropdown.Toggle variant="light" id="profile-dropdown">
+              <Dropdown.Toggle variant="" id="profile-dropdown">
                 <Image
                   src={myProfile?.avatar}
                   style={{
                     width: "3rem",
+
                     borderRadius: "50%",
                     height: "2.7rem",
                     aspectRatio: "1/1",
@@ -99,7 +121,7 @@ export default function MyNav() {
 
                 <Dropdown.Item href="/">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item onClick={logOut} href="/">
+                <Dropdown.Item onClick={logOut} href="/login">
                   Logout
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -107,6 +129,6 @@ export default function MyNav() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </Container>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ export default function MyHome() {
       <MyJumbo />
       <MyCards />
       <MyStatic />
-      <MyFoot />
+      {/* <MyFoot /> */}
     </>
   );
 }

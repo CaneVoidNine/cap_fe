@@ -49,14 +49,13 @@ function MyComponent(props) {
     <Col key={i}>
       <Row>
         <Card
-          className="mb-4"
+          className="mb-4 "
           style={{
             backgroundColor: "#F5F5F5",
             borderRadius: "10px",
             boxShadow: "0px 0px 10px #888888",
-            height: "50rem",
+            maxHeight: "40rem",
             overflowY: "hidden",
-            textOverflow: "ellipsis",
           }}
         >
           <Card.Body>
@@ -67,15 +66,24 @@ function MyComponent(props) {
                   backgroundColor: "#F5F5F5",
                   borderRadius: "10px",
                   boxShadow: "0px 0px 10px #888888",
+                  height: "30rem",
+                  objectFit: "cover",
+                  objectPosition: "center",
                 }}
               ></Card.Img>
             </Link>
             <Card.Title className="mt-2 ml-1">
               {filteredCards[i]?.title}
             </Card.Title>
-            <Card.Text className="ml-1">{filteredCards[i]?.info}</Card.Text>
+
+            <Card.Text
+              className="ml-1 ovef"
+              style={{ maxHeight: "5rem", overflowY: "scroll" }}
+            >
+              {filteredCards[i]?.info}
+            </Card.Text>
             <Card.Text className="ml-1">
-              <AiFillLike size={30} /> <AiFillHeart size={30} />
+              {/* <AiFillLike size={30} /> <AiFillHeart size={30} /> */}
             </Card.Text>
           </Card.Body>
         </Card>

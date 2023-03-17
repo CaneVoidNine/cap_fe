@@ -23,7 +23,7 @@ export default function MyCards() {
   }, []);
   return (
     <Container className="mb-4">
-      <h2 className="mb-2">Trending </h2>
+      <h2 className="mb-2 woit">Trending </h2>
       <Row className="mb-4">
         <Col xs={12} md={6}>
           <Card className="card1">
@@ -83,7 +83,7 @@ export default function MyCards() {
           </Row>
         </Col>
       </Row>
-      <h2>New exercises!</h2>
+      <h2 className="woit">New exercises</h2>
       <Row>
         <Col lg={6} className="mb-4">
           <Card>

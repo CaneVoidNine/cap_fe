@@ -116,11 +116,19 @@ export default function MyAdd() {
     <>
       <MyNav />
       <div className="center">
-        <Container>
+        <Container
+          style={{
+            width: "100%",
+            marginInline: "0",
+            backgroundColor: "#F5F5F5",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px #888888",
+          }}
+        >
           <Row className="px-5 pb-5 d-flex justify-content-md-center">
             <Col xs={12} md={6}>
               <Row
-                className="d-flex justify-content-center"
+                className="mt-4 d-flex justify-content-center"
                 style={{
                   width: "100%",
                   marginInline: "0",
@@ -129,7 +137,7 @@ export default function MyAdd() {
                   boxShadow: "0px 0px 10px #888888",
                 }}
               >
-                <Col className="py-2 d-flex justify-content-center">
+                <Col className="p-2  d-flex justify-content-center">
                   <h2>Add New Workout!</h2>
                 </Col>
               </Row>

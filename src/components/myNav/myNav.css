@@ -2,7 +2,7 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 .tbc:hover {
-  text-shadow: 1px 1px #1d252d;
+  text-shadow: 1px 1px #c63b45;
 }
 .nov {
   position: fixed;
@@ -15,4 +15,7 @@
 }
 .pade {
   padding-top: 3rem;
+}
+.woit {
+  color: white;
 }

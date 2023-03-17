@@ -7,7 +7,7 @@ import { Col, Row, Image } from "react-bootstrap";
 export default function MyJumbo() {
   return (
     <>
-      <Container className="mb-4 pad">
+      <Container className="mt-3 mb-4 pad">
         <Row className="align-items-center">
           <Col
             xl={6}

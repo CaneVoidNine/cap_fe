@@ -6,3 +6,6 @@
   background-color: grey;
   border-color: grey;
 }
+.ovef::-webkit-scrollbar {
+  display: none;
+}
