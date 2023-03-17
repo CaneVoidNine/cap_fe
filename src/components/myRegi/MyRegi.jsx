@@ -119,7 +119,7 @@ export default function MyRegi() {
               >
                 Register
               </Button>
-              <Link to={"/"}>
+              <Link to={"/login"}>
                 <Button className="mt-2" variant="link">
                   Already have an account?
                 </Button>
