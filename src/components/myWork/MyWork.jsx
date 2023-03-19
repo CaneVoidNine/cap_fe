@@ -7,25 +7,48 @@ import {
   ToggleButton,
   Image,
 } from "react-bootstrap";
+import { Connect } from "react-redux";
 import img from "../../assets/100db.jpg";
-import { AiFillHeart, AiFillLike } from "react-icons/ai";
+import { AiFillHeart, AiFillLike, AiOutlineHeart } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import PageItem from "react-bootstrap/PageItem";
 import "./myWork.css";
 import MyNav from "../myNav/MyNav";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWorkoutsAction } from "../../redux/actions";
+import {
+  fetchWorkoutsAction,
+  likeWorkAction,
+  unlikeWorkAction,
+} from "../../redux/actions";
 
-function MyComponent(props) {
+function MyComponent({ likes }) {
   const [activePage, setActivePage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+
   const dispatch = useDispatch();
   const myWork = useSelector((state) => state.work.workouts);
+  const myLikes = useSelector((state) => state.user.user.likes);
+
+  const handleLike = (e, likes) => {
+    e.preventDefault();
+    if (myLikes.includes(likes)) {
+      dispatch(unlikeWorkAction(likes));
+    } else {
+      dispatch(likeWorkAction(likes));
+    }
+
+    // console.log(likes);
+    // dispatch(likeWorkAction(like));
+  };
+
+  const isLiked = myLikes.includes(likes);
 
   useEffect(() => {
     dispatch(fetchWorkoutsAction());
-  }, []);
+    console.log(likes);
+    console.log(myLikes);
+  }, [likes]);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -72,8 +95,23 @@ function MyComponent(props) {
                 }}
               ></Card.Img>
             </Link>
-            <Card.Title className="mt-2 ml-1">
-              {filteredCards[i]?.title}
+            <Card.Title>
+              <Row className="mt-2">
+                <Col>{filteredCards[i]?.title}</Col>
+                <Col className="d-flex justify-content-end">
+                  {myLikes.includes(filteredCards[i]?.title) ? (
+                    <AiFillHeart
+                      style={{ cursor: "pointer" }}
+                      onClick={(e) => handleLike(e, filteredCards[i]?.title)}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      style={{ cursor: "pointer" }}
+                      onClick={(e) => handleLike(e, filteredCards[i]?.title)}
+                    />
+                  )}
+                </Col>
+              </Row>
             </Card.Title>
 
             <Card.Text
@@ -82,9 +120,7 @@ function MyComponent(props) {
             >
               {filteredCards[i]?.info}
             </Card.Text>
-            <Card.Text className="ml-1">
-              {/* <AiFillLike size={30} /> <AiFillHeart size={30} /> */}
-            </Card.Text>
+            <Card.Text className="ml-1"></Card.Text>
           </Card.Body>
         </Card>
       </Row>

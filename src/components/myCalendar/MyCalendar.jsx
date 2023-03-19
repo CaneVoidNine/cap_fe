@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Table, Row, Col, ListGroup } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
 export default function MyCalendar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [calendarEntries, setCalendarEntries] = useState([]);
-
+  const myLikes = useSelector((state) => state.user.user.likes);
+  const myToken = useSelector((state) => state.user.accessToken);
   const days = [
     "Monday",
     "Tuesday",
@@ -21,6 +23,9 @@ export default function MyCalendar() {
 
   const hours = Array.from({ length: 15 }, (_, i) => i + 8);
 
+  useEffect(() => {
+    console.log(myLikes);
+  }, []);
   return (
     <>
       <MyNav />
@@ -55,14 +60,14 @@ export default function MyCalendar() {
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
             >
-              {items.map((item) => (
+              {myLikes.map((like) => (
                 <ListGroup.Item
-                  key={item}
-                  onClick={() => setSelectedItem(item)}
-                  active={selectedItem === item}
+                  key={like}
+                  onClick={() => setSelectedItem(like)}
+                  active={selectedItem === like}
                   style={{ cursor: "pointer" }}
                 >
-                  {item}
+                  {like}
                 </ListGroup.Item>
               ))}
             </ListGroup>
