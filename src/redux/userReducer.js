@@ -1,5 +1,6 @@
 import {
   LIKE_WORK,
+  SAVE_CALENDAR,
   SAVE_TOKEN,
   SAVE_USER,
   SAVE_USERS,
@@ -11,6 +12,7 @@ const initialState = {
   user: [],
   accessToken: "",
   likes: [],
+  calendar: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -39,6 +41,27 @@ const userReducer = (state = initialState, action) => {
           ...state.user,
           likes: state.user.likes.filter((like) => like !== action.payload),
         },
+      };
+    case SAVE_CALENDAR:
+      const newEntry = action.payload;
+      const currentCalendar = state.calendar;
+      let updatedCalendar;
+
+      if (Array.isArray(currentCalendar)) {
+        updatedCalendar = [...currentCalendar, newEntry];
+      } else {
+        updatedCalendar = [newEntry];
+      }
+
+      return {
+        ...state,
+        calendar: updatedCalendar,
+      };
+    case "CLEAR_CALENDAR":
+      return {
+        ...state,
+
+        calendar: [],
       };
     default:
       return state;

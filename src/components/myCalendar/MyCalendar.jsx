@@ -1,8 +1,10 @@
+import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
-import { Container, Table, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Table, Row, Col, ListGroup, Button } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { clearCalendarAction } from "../../redux/actions";
 
 const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
@@ -11,6 +13,8 @@ export default function MyCalendar() {
   const [calendarEntries, setCalendarEntries] = useState([]);
   const myLikes = useSelector((state) => state.user.user.likes);
   const myToken = useSelector((state) => state.user.accessToken);
+  const myCalendar = useSelector((state) => state.user.calendar);
+  const dispatch = useDispatch();
   const days = [
     "Monday",
     "Tuesday",
@@ -25,7 +29,13 @@ export default function MyCalendar() {
 
   useEffect(() => {
     console.log(myLikes);
-  }, []);
+    console.log(myCalendar);
+    console.log(calendarEntries);
+    dispatch({ type: "ADD_CALENDAR_ENTRY", payload: calendarEntries });
+  }, [calendarEntries, dispatch]);
+  const handleClearCalendar = () => {
+    dispatch(clearCalendarAction());
+  };
   return (
     <>
       <MyNav />
@@ -90,14 +100,16 @@ export default function MyCalendar() {
                       {hours.map((hour) => (
                         <td
                           key={`${day}-${hour}`}
-                          onClick={() =>
-                            setCalendarEntries([
-                              ...calendarEntries,
-                              { day, hour, item: selectedItem },
-                            ])
-                          }
+                          onClick={() => {
+                            const newEntry = { day, hour, item: selectedItem };
+                            setCalendarEntries([...calendarEntries, newEntry]);
+                            dispatch({
+                              type: "SAVE_CALENDAR",
+                              payload: newEntry,
+                            });
+                          }}
                         >
-                          {calendarEntries
+                          {myCalendar
                             .filter(
                               (entry) =>
                                 entry.day === day && entry.hour === hour
@@ -113,6 +125,7 @@ export default function MyCalendar() {
             </div>
           </Col>
         </Row>
+        <Button onClick={handleClearCalendar}>Clear</Button>
       </Container>
     </>
   );

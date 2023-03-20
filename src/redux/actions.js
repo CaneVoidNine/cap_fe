@@ -4,9 +4,19 @@ export const LIKE_WORK = "LIKE_WORK";
 export const UNLIKE_WORK = "UNLIKE_WORK";
 export const SAVE_TOKEN = "SAVE_TOKEN";
 export const FETCH_WORK = "FETCH_WORK";
+export const SAVE_CALENDAR = "SAVE_CALENDAR";
+export const CLEAR_CALENDAR = "CLEAR_CALENDAR";
 // export const SAVE_WORK = "SAVE_WORK";
 const apiUrl = process.env.BE_URL;
 
+export const clearCalendarAction = () => ({
+  type: "CLEAR_CALENDAR",
+});
+
+export const saveCalendarAction = (calendar) => ({
+  type: SAVE_CALENDAR,
+  payload: calendar,
+});
 // export const saveWorkAction = (workout) => {
 //   return {
 //     type: SAVE_WORK,
