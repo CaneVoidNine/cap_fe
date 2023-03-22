@@ -40,19 +40,17 @@ export default function MyCalendar() {
     <>
       <MyNav />
       <Container
-        className="mt-4 pb-4"
-        style={{
-          backgroundColor: "#F5F5F5",
-          paddingInline: "0",
-          borderRadius: "10px",
-          boxShadow: "0px 0px 10px #888888",
-        }}
+        className="mt-4 pad"
+        // style={{
+        //   backgroundColor: "#F5F5F5",
+        //   paddingInline: "0",
+        //   borderRadius: "10px",
+        //   boxShadow: "0px 0px 10px #888888",
+        // }}
       >
         <Row
-          className="mb-4"
+          className=""
           style={{
-            width: "100%",
-
             marginInline: "0",
             paddingInline: "0",
             backgroundColor: "#F5F5F5",
@@ -60,12 +58,41 @@ export default function MyCalendar() {
             boxShadow: "0px 0px 10px #888888",
           }}
         >
-          <Col className="py-2 d-flex justify-content-center">
+          <Col
+            className="py-2 d-flex justify-content-center"
+            style={{
+              backgroundColor: "#F5F5F5",
+              paddingInline: "0",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+            }}
+          >
             <h2>Calendar</h2>
           </Col>
         </Row>
-        <Row className="px-4">
-          <Col md={2}>
+        <Row
+          className="p-4"
+          style={{
+            backgroundColor: "#F5F5F5",
+            marginInline: "0",
+            paddingInline: "0",
+
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px #888888",
+          }}
+        >
+          <Col
+            md={2}
+            className="p-4"
+            style={{
+              backgroundColor: "#F5F5F5",
+
+              borderRadius: "10px",
+              boxShadow: "0px 0px 10px #888888",
+            }}
+          >
+            <h3>Favourites</h3>
+            <hr />
             <ListGroup
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
@@ -82,6 +109,7 @@ export default function MyCalendar() {
               ))}
             </ListGroup>
           </Col>
+
           <Col md={10}>
             <div style={{ overflowX: "auto", overflowY: "auto" }}>
               <Table striped bordered hover>
@@ -124,8 +152,10 @@ export default function MyCalendar() {
               </Table>
             </div>
           </Col>
+          <Col className="mt-3 d-flex justify-content-end">
+            <Button onClick={handleClearCalendar}>Clear Calendar</Button>
+          </Col>
         </Row>
-        <Button onClick={handleClearCalendar}>Clear</Button>
       </Container>
     </>
   );

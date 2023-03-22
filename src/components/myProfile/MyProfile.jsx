@@ -114,8 +114,6 @@ export default function MyProfile() {
           </Modal.Footer>
         </Modal>
       </Container>
-
-      <MyCalendar />
     </>
   );
 }
