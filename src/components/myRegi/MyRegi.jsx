@@ -53,9 +53,9 @@ export default function MyRegi() {
       <Container
         className=""
         style={{
-          backgroundColor: "#F5F5F5",
+          backgroundColor: "#202124",
           borderRadius: "10px",
-          boxShadow: "0px 0px 10px #888888",
+          boxShadow: "0px 0px 10px #C63B45",
         }}
       >
         <Row className="p-5 d-flex justify-content-md-center">
@@ -70,7 +70,7 @@ export default function MyRegi() {
               onSubmit={handleSubmit}
             >
               <Form.Group controlId="formName">
-                <Form.Label>Name</Form.Label>
+                <Form.Label style={{ color: "#C63B45" }}>Name</Form.Label>
                 <Form.Control
                   onChange={(e) => setName(e.target.value)}
                   type="text"
@@ -78,8 +78,8 @@ export default function MyRegi() {
                   required
                 />
               </Form.Group>
-              <Form.Group controlId="formLastName">
-                <Form.Label>Last Name</Form.Label>
+              <Form.Group className="mt-2" controlId="formLastName">
+                <Form.Label style={{ color: "#C63B45" }}>Last Name</Form.Label>
                 <Form.Control
                   onChange={(e) => setLastName(e.target.value)}
                   type="text"
@@ -87,8 +87,10 @@ export default function MyRegi() {
                   required
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+              <Form.Group className="mt-2" controlId="formBasicEmail">
+                <Form.Label style={{ color: "#C63B45" }}>
+                  Email address
+                </Form.Label>
                 <Form.Control
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
@@ -98,7 +100,7 @@ export default function MyRegi() {
               </Form.Group>
 
               <Form.Group className="mt-2" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label style={{ color: "#C63B45" }}>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
@@ -108,19 +110,20 @@ export default function MyRegi() {
               </Form.Group>
 
               <Button
+                className="mt-3"
                 style={{
                   marginTop: "10px",
                   borderRadius: "20px",
                   fontWeight: "bold",
                 }}
-                variant="primary"
+                variant="outline-success"
                 type="submit"
                 onClick={(e) => handleSubmit(e)}
               >
                 Register
               </Button>
               <Link to={"/login"}>
-                <Button className="mt-2" variant="link">
+                <Button className="mt-3" variant="link">
                   Already have an account?
                 </Button>
               </Link>

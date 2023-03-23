@@ -10,7 +10,7 @@ import {
   AccordionContext,
 } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import MyNav from "../myNav/MyNav";
 import { MdOutlineExpandLess, MdOutlineExpandMore } from "react-icons/md";
@@ -88,19 +88,49 @@ export default function MyDetails() {
             <Row
               className="p-4 my-2 mx-1"
               style={{
-                backgroundColor: "#F5F5F5",
+                backgroundColor: "#202124",
                 borderRadius: "10px",
-                boxShadow: "0px 0px 10px #888888",
+                boxShadow: "0px 0px 10px #C63B45",
               }}
             >
               <Accordion>
-                <Card className="accordion-post-group">
+                <Card
+                  className="accordion-post-group"
+                  style={{ backgroundColor: "#202124", padding: 0, margin: 0 }}
+                >
                   <Card.Header className="d-flex justify-content-between align-items-center">
                     <h2>Exercise {i + 1}</h2>
                     <CustomToggle eventKey="1"></CustomToggle>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="1">
-                    <div className="py-3">{exercise?.title}</div>
+                  <Accordion.Collapse eventKey="1" className="w-100">
+                    <Row>
+                      <Col md={12}>
+                        <h3>{exercise?.title}</h3>
+                      </Col>
+                      <Col>
+                        <p>{exercise?.info}</p>
+                      </Col>
+                      <Col>
+                        <img src={exercise?.image}></img>
+                      </Col>
+                      <Col md={12}>
+                        <h4 style={{ color: "#C63B45" }}>
+                          Exercise time:{" "}
+                          <span style={{ color: "white" }}>
+                            {exercise?.time}
+                          </span>{" "}
+                          minutes
+                        </h4>
+                      </Col>
+                      <Col md={12}>
+                        <h4 style={{ color: "#C63B45" }}>
+                          Number of sets:{" "}
+                          <span style={{ color: "white" }}>
+                            {exercise?.sets}
+                          </span>{" "}
+                        </h4>
+                      </Col>
+                    </Row>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
@@ -112,6 +142,7 @@ export default function MyDetails() {
   return (
     <>
       <MyNav />
+
       <Container
         className="mt-5 pade"
         // style={{ width: "100%", border: "1px solid" }}
@@ -121,24 +152,24 @@ export default function MyDetails() {
             className="my-3"
             src={movie?.image}
             style={{
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#202124",
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
+              boxShadow: "0px 0px 10px #C63B45",
               maxHeight: "25rem",
             }}
           ></Image>
         </Row>
-        <Row className="d-flex justify-content-end mr-3">
+        {/* <Row className="d-flex justify-content-end mr-3">
           <Button onClick={handleDelete} variant="danger">
             Delete
           </Button>
-        </Row>
+        </Row> */}
         <Container
           className="mt-3 pb-3"
           style={{
-            backgroundColor: "#F5F5F5",
+            backgroundColor: "#202124",
             borderRadius: "10px",
-            boxShadow: "0px 0px 10px #888888",
+            boxShadow: "0px 0px 10px #C63B45",
           }}
         >
           <Row>
@@ -149,8 +180,10 @@ export default function MyDetails() {
             >
               <h1>{movie?.title}</h1>
             </Col>
-            <Col md={12} className=" d-flex justify-content-center">
-              <p style={{ fontSize: "1.3rem" }}>{movie?.info}</p>
+            <Col>
+              <Container className="text-center  d-flex justify-content-center">
+                <p style={{ fontSize: "1.3rem" }}>{movie?.info}</p>
+              </Container>
             </Col>
           </Row>
           {exe}

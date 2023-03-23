@@ -23,20 +23,19 @@ export default function MyCards() {
   }, []);
   return (
     <Container className="mb-4">
-      <h2 className="mb-2 woit">Trending </h2>
+      <h2 className="mb-3 woit">Trending </h2>
       <Row className="mb-4">
         <Col xs={12} md={6}>
           <Card className="card1">
-            <Link to={`/details/${myWork[0]?._id}`}>
+            <Link to={`/details/${myWork[4]?._id}`}>
               <Card.Img
                 variant="top"
-                src={myWork[0]?.image}
+                src={myWork[4]?.image}
                 alt="Image 1"
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
-                  height: "30rem",
+                  boxShadow: "0px 0px 10px #C63B45",
                 }}
               />
             </Link>
@@ -47,16 +46,15 @@ export default function MyCards() {
           <Row>
             <Col xs={12}>
               <Card className="card2">
-                <Link to={`/details/${myWork[1]?._id}`}>
+                <Link to={`/details/${myWork[6]?._id}`}>
                   <Card.Img
                     style={{
-                      backgroundColor: "#F5F5F5",
+                      backgroundColor: "#202124",
                       borderRadius: "10px",
-                      boxShadow: "0px 0px 10px #888888",
-                      height: "15rem",
+                      boxShadow: "0px 0px 10px #C63B45",
                     }}
                     variant="top"
-                    src={myWork[1]?.image}
+                    src={myWork[6]?.image}
                     alt="Image 2"
                   />
                 </Link>
@@ -65,16 +63,16 @@ export default function MyCards() {
 
             <Col xs={12}>
               <Card className="card3">
-                <Link to={`/details/${myWork[2]?._id}`}>
+                <Link to={`/details/${myWork[5]?._id}`}>
                   <Card.Img
                     style={{
-                      backgroundColor: "#F5F5F5",
+                      backgroundColor: "#202124",
                       borderRadius: "10px",
-                      boxShadow: "0px 0px 10px #888888",
-                      height: "15rem",
+                      boxShadow: "0px 0px 10px #C63B45",
+                      height: "",
                     }}
                     variant="top"
-                    src={myWork[2]?.image}
+                    src={myWork[5]?.image}
                     alt="Image 3"
                   />
                 </Link>
@@ -83,18 +81,19 @@ export default function MyCards() {
           </Row>
         </Col>
       </Row>
-      <h2 className="woit">New exercises</h2>
+      <h2 className=" mb-3 woit">New exercises</h2>
       <Row>
         <Col lg={6} className="mb-4">
           <Card>
-            <Link to="/details">
+            <Link to={`/details/${myWork[myWork.length - 1]?._id}`}>
               <Card.Img
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
+                  boxShadow: "0px 0px 10px #C63B45",
+                  maxHeight: "15.3rem",
                 }}
-                src={img1}
+                src={myWork[myWork.length - 1]?.image}
               />
               <Card.ImgOverlay></Card.ImgOverlay>
             </Link>
@@ -102,14 +101,15 @@ export default function MyCards() {
         </Col>
         <Col lg={6} className="mb-4">
           <Card>
-            <Link to="/details">
+            <Link to={`/details/${myWork[myWork.length - 2]?._id}`}>
               <Card.Img
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
+                  boxShadow: "0px 0px 10px #C63B45",
+                  maxHeight: "15.3rem",
                 }}
-                src={img2}
+                src={myWork[myWork.length - 2]?.image}
               />
               <Card.ImgOverlay></Card.ImgOverlay>
             </Link>
@@ -119,14 +119,15 @@ export default function MyCards() {
       <Row>
         <Col lg={6} className="mb-4">
           <Card>
-            <Link to="/details">
+            <Link to={`/details/${myWork[myWork.length - 3]?._id}`}>
               <Card.Img
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
+                  boxShadow: "0px 0px 10px #C63B45",
+                  maxHeight: "15.3rem",
                 }}
-                src={img3}
+                src={myWork[myWork.length - 3]?.image}
               />
               <Card.ImgOverlay></Card.ImgOverlay>
             </Link>
@@ -134,14 +135,15 @@ export default function MyCards() {
         </Col>
         <Col lg={6} className="mb-4">
           <Card>
-            <Link to="/details">
+            <Link to={`/details/${myWork[myWork.length - 4]?._id}`}>
               <Card.Img
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
+                  boxShadow: "0px 0px 10px #C63B45",
+                  maxHeight: "15.3rem",
                 }}
-                src={img4}
+                src={myWork[myWork.length - 4]?.image}
               />
               <Card.ImgOverlay></Card.ImgOverlay>
             </Link>

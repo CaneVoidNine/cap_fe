@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./MyJumbo.css";
 import Container from "react-bootstrap/Container";
 import "./MyJumbo.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,9 +14,9 @@ export default function MyJumbo() {
             lg={12}
             className="p-5"
             style={{
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#202124",
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
+              boxShadow: "0px 0px 10px #C63B45",
               minHeight: "24.5rem",
             }}
           >
@@ -38,8 +38,8 @@ export default function MyJumbo() {
               style={{
                 borderRadius: "10px",
                 overflow: "hidden",
-                backgroundColor: "#F5F5F5",
-                boxShadow: "0px 0px 10px #888888",
+                backgroundColor: "#202124",
+                boxShadow: "0px 0px 10px #C63B45",
                 maxHeight: "24.5rem",
               }}
             >
@@ -48,7 +48,7 @@ export default function MyJumbo() {
                 alt="Right Image"
                 fluid
                 style={{
-                  border: "10px solid #F5F5F5",
+                  border: "10px solid #202124",
                   borderLeft: "0px",
                   borderRadius: "0px 20px 20px 0px",
                   width: "100%",

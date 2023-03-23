@@ -38,15 +38,16 @@ export default function MyCalendar() {
     dispatch(clearCalendarAction());
   };
   return (
-    <>
+    <div className=" pad">
       <MyNav />
       <Container
         className="mt-4 pb-4"
         style={{
-          backgroundColor: "#F5F5F5",
+          backgroundColor: "#202124",
           paddingInline: "0",
           borderRadius: "10px",
-          boxShadow: "0px 0px 10px #888888",
+          border: "1px solid white",
+          boxShadow: "0px 0px 10px #C63B45",
         }}
       >
         <Row
@@ -56,9 +57,10 @@ export default function MyCalendar() {
 
             marginInline: "0",
             paddingInline: "0",
-            backgroundColor: "#F5F5F5",
+            backgroundColor: "#202124",
             borderRadius: "10px",
-            boxShadow: "0px 0px 10px #888888",
+            border: "1px solid white",
+            boxShadow: "0px 0px 10px #C63B45",
           }}
         >
           <Col className="py-2 d-flex justify-content-center">
@@ -66,7 +68,17 @@ export default function MyCalendar() {
           </Col>
         </Row>
         <Row className="px-4">
-          <Col md={2}>
+          <Col
+            className="py-2"
+            md={2}
+            style={{
+              backgroundColor: "#202124",
+
+              border: "1px solid white",
+            }}
+          >
+            <h2>Favourites</h2>
+            <hr style={{ borderColor: "#C63B45" }} />
             <ListGroup
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
@@ -76,7 +88,13 @@ export default function MyCalendar() {
                   key={like}
                   onClick={() => setSelectedItem(like)}
                   active={selectedItem === like}
-                  style={{ cursor: "pointer" }}
+                  className="mt-1"
+                  style={{
+                    cursor: "pointer",
+                    // color: "white",
+
+                    border: "1px solid #C63B45",
+                  }}
                 >
                   {like}
                 </ListGroup.Item>
@@ -84,8 +102,15 @@ export default function MyCalendar() {
             </ListGroup>
           </Col>
           <Col md={10}>
-            <div style={{ overflowX: "auto", overflowY: "auto" }}>
-              <Table striped bordered hover>
+            <div
+              style={{
+                overflowX: "auto",
+                overflowY: "auto",
+                backgroundColor: "white",
+                border: "1px solid white",
+              }}
+            >
+              <Table style={{}} striped bordered hover>
                 <thead>
                   <tr>
                     <th></th>
@@ -126,8 +151,15 @@ export default function MyCalendar() {
             </div>
           </Col>
         </Row>
-        <Button onClick={handleClearCalendar}>Clear</Button>
+        <Col
+          md={12}
+          className=" mt-3 d-flex justify-content-end align-items-end"
+        >
+          <Button variant="outline-danger" onClick={handleClearCalendar}>
+            Clear Calendar
+          </Button>
+        </Col>
       </Container>
-    </>
+    </div>
   );
 }

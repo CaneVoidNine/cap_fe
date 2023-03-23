@@ -9,9 +9,9 @@ export default function MyStatic() {
       fluid
       className="bd"
       style={{
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "#202124",
         borderRadius: "10px",
-        boxShadow: "0px 0px 10px #888888",
+        boxShadow: "0px 0px 10px #C63B45",
       }}
     >
       <div className="card-group">

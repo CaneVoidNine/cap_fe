@@ -48,6 +48,7 @@ function MyComponent({ likes }) {
     dispatch(fetchWorkoutsAction());
     console.log(likes);
     console.log(myLikes);
+    console.log(myWork);
   }, [likes]);
 
   const handlePageChange = (pageNumber) => {
@@ -59,7 +60,7 @@ function MyComponent({ likes }) {
   };
 
   const cardsPerPage = 4;
-  const totalCards = 16;
+  const totalCards = 40;
   const totalPages = Math.ceil(totalCards / cardsPerPage);
   const startIndex = (activePage - 1) * cardsPerPage;
   const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
@@ -68,45 +69,51 @@ function MyComponent({ likes }) {
     card.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const cards = filteredCards.map((workout, i) => (
-    <Col key={i}>
+  const cards = filteredCards.reverse().map((workout, i) => (
+    <Col lg={6} md={12} key={i}>
       <Row>
         <Card
           className="mb-4 "
           style={{
-            backgroundColor: "#F5F5F5",
-            borderRadius: "10px",
-            boxShadow: "0px 0px 10px #888888",
-            maxHeight: "40rem",
-            overflowY: "hidden",
+            backgroundColor: "#202124",
+            borderRadius: "0px",
+            border: "1px solid white",
+            boxShadow: "0px 0px 10px #C63B45",
+            height: "30rem",
+            overflowY: "scroll",
           }}
         >
           <Card.Body>
             <Link to={`/details/${filteredCards[i]?._id}`}>
               <Card.Img
                 src={filteredCards[i]?.image}
+                className="d-flex justify-content-center align-items-center"
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#202124",
                   borderRadius: "10px",
-                  boxShadow: "0px 0px 10px #888888",
-                  height: "30rem",
+                  boxShadow: "0px 0px 10px #C63B45",
+
                   objectFit: "cover",
-                  objectPosition: "center",
                 }}
-              ></Card.Img>
+              />
             </Link>
             <Card.Title>
               <Row className="mt-2">
-                <Col>{filteredCards[i]?.title}</Col>
-                <Col className="d-flex justify-content-end">
+                <Col md={12} className="mt-1 d-flex justify-content-center">
+                  <h2>{filteredCards[i]?.title}</h2>
+                </Col>
+                <Col className="d-flex justify-content-end ms-auto">
                   {myLikes?.includes(filteredCards[i]?.title) ? (
                     <AiFillHeart
+                      className=""
                       style={{ cursor: "pointer" }}
+                      color="#C63B45"
                       onClick={(e) => handleLike(e, filteredCards[i]?.title)}
                     />
                   ) : (
                     <AiOutlineHeart
                       style={{ cursor: "pointer" }}
+                      color="#C63B45"
                       onClick={(e) => handleLike(e, filteredCards[i]?.title)}
                     />
                   )}
@@ -114,13 +121,10 @@ function MyComponent({ likes }) {
               </Row>
             </Card.Title>
 
-            <Card.Text
-              className="ml-1 ovef"
-              style={{ maxHeight: "5rem", overflowY: "scroll" }}
-            >
+            <Card.Text className="ml-1 pb-3 ovef" style={{}}>
               {filteredCards[i]?.info}
             </Card.Text>
-            <Card.Text className="ml-1"></Card.Text>
+            <Card.Text className=""></Card.Text>
           </Card.Body>
         </Card>
       </Row>
@@ -146,16 +150,16 @@ function MyComponent({ likes }) {
   return (
     <>
       <MyNav />
-      <Container className="pad">
+      <Container className="pad mt-3">
         <Row className="d-flex justify-content-center align-items-center">
           <Col
             xl={6}
             lg={12}
             className="p-5"
             style={{
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#202124",
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
+              boxShadow: "0px 0px 10px #C63B45",
               minHeight: "20rem",
             }}
           >
@@ -176,8 +180,8 @@ function MyComponent({ likes }) {
               style={{
                 borderRadius: "10px",
                 overflow: "hidden",
-                backgroundColor: "#F5F5F5",
-                boxShadow: "0px 0px 10px #888888",
+                backgroundColor: "#202124",
+                boxShadow: "0px 0px 10px #C63B45",
                 maxHeight: "22rem",
               }}
             >
@@ -186,7 +190,7 @@ function MyComponent({ likes }) {
                 src="https://thumbs.dreamstime.com/b/diverse-group-friends-laughing-workout-session-sportswear-standing-arm-together-gym-class-149716233.jpg"
                 alt="Right Image"
                 style={{
-                  border: "10px solid #F5F5F5",
+                  border: "10px solid #202124",
                   borderLeft: "0px",
                   borderRadius: "0px 20px 20px 0px",
                   width: "100%",
@@ -198,31 +202,31 @@ function MyComponent({ likes }) {
           <Row
             className="mt-5 p-3"
             style={{
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#202124",
 
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
+              boxShadow: "0px 0px 10px #C63B45",
             }}
           >
             <Form
               className="d-flex"
               style={{
                 width: "40rem",
-                backgroundColor: "#F5F5F5",
+                backgroundColor: "#202124",
                 borderRadius: "10px",
-                boxShadow: "0px 0px 10px #888888",
+                boxShadow: "0px 0px 10px #C63B45",
               }}
             >
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2 "
+                className=" "
                 aria-label="Search"
                 size="lg"
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Button
-                variant="outline-dark"
+                variant="outline-danger"
                 style={{
                   width: "4rem",
                   borderLeft: "",
@@ -236,7 +240,7 @@ function MyComponent({ likes }) {
             <Link to={"/add"}>
               <Button
                 className="ml-2"
-                variant="outline-dark"
+                variant="outline-danger"
                 style={{ height: "100%" }}
               >
                 Add
@@ -251,7 +255,7 @@ function MyComponent({ likes }) {
         className="bg-dark mt-4 d-flex justify-content-center"
         style={{ color: "white" }}
       ></Container>
-      <Container className="mt-5">
+      <Container className="mt-2">
         <Row>{cardsToShow.slice(0, 2)}</Row>
         <Row>{cardsToShow.slice(2, 4)}</Row>
         <Row>{cardsToShow.slice(4, 6)}</Row>
@@ -262,9 +266,9 @@ function MyComponent({ likes }) {
               size="lg"
               className="rounded pt-3 px-3"
               style={{
-                backgroundColor: "#F5F5F5",
+                backgroundColor: "#202124",
                 borderRadius: "10px",
-                boxShadow: "0px 0px 10px #888888",
+                boxShadow: "0px 0px 10px #C63B45",
               }}
             >
               {paginationItems}

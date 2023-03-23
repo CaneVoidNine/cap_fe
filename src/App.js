@@ -24,6 +24,7 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/add" element={<MyAdd />} />
         <Route path="/" element={<MyHome />} />
+        <Route path="/calendar" element={<MyCalendar />} />
       </Routes>
     </Router>
   );

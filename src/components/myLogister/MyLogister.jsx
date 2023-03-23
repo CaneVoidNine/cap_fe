@@ -57,9 +57,9 @@ export default function MyLogister() {
       <Container
         className=""
         style={{
-          backgroundColor: "#F5F5F5",
+          backgroundColor: "#202124",
           borderRadius: "10px",
-          boxShadow: "0px 0px 10px #888888",
+          boxShadow: "0px 0px 10px #C63B45",
         }}
       >
         <Row className="p-5 d-flex justify-content-md-center">
@@ -74,7 +74,9 @@ export default function MyLogister() {
               onSubmit={handleSubmit}
             >
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label style={{ color: "#C63B45" }}>
+                  Email address
+                </Form.Label>
                 <Form.Control
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
@@ -84,7 +86,7 @@ export default function MyLogister() {
               </Form.Group>
 
               <Form.Group className="mt-2" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label style={{ color: "#C63B45" }}>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
@@ -99,14 +101,14 @@ export default function MyLogister() {
                   borderRadius: "20px",
                   fontWeight: "bold",
                 }}
-                variant="primary"
+                variant="outline-success"
                 type="submit"
                 onClick={(e) => handleSubmit(e)}
               >
                 Login
               </Button>
               <Link to={"/register"}>
-                <Button className="mt-2" variant="link">
+                <Button className="mt-3" variant="link">
                   Create an account
                 </Button>
               </Link>

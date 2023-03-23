@@ -28,9 +28,9 @@ export default function MyProfile() {
         <Row
           className="pb-3"
           style={{
-            backgroundColor: "#F5F5F5",
+            backgroundColor: "#202124",
             borderRadius: "10px",
-            boxShadow: "0px 0px 10px #888888",
+            boxShadow: "0px 0px 10px #C63B45",
           }}
         >
           <Row
@@ -38,9 +38,9 @@ export default function MyProfile() {
             style={{
               width: "100%",
               marginInline: "0",
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#202124",
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px #888888",
+              boxShadow: "0px 0px 10px #C63B45",
             }}
           >
             <Col className="py-2 d-flex justify-content-center">
@@ -62,9 +62,9 @@ export default function MyProfile() {
                   style={{
                     width: "19rem",
                     height: "16rem",
-                    backgroundColor: "#F5F5F5",
+                    backgroundColor: "#202124",
                     borderRadius: "10px",
-                    boxShadow: "0px 0px 10px #888888",
+                    boxShadow: "0px 0px 10px #C63B45",
                   }}
                 ></img>
               </Col>
@@ -114,8 +114,6 @@ export default function MyProfile() {
           </Modal.Footer>
         </Modal>
       </Container>
-
-      <MyCalendar />
     </>
   );
 }
