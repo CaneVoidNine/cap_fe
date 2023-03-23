@@ -24,23 +24,23 @@ const userReducer = (state = initialState, action) => {
     case SAVE_USERS:
       return { ...state, users: action.payload };
     case LIKE_WORK:
-      console.log(state.user.likes);
+      console.log(state.likes.likes);
       const likes = Array.isArray(action.payload)
         ? action.payload
         : [action.payload];
-      const updatedLikes = [...new Set([...state.user.likes, ...likes])].filter(
-        Boolean
-      );
+      const updatedLikes = [
+        ...new Set([...state.likes.likes, ...likes]),
+      ].filter(Boolean);
       if (updatedLikes.length !== state.likes.length) {
-        return { ...state, user: { ...state.user, likes: updatedLikes } };
+        return { ...state, likes: { ...state.likes, likes: updatedLikes } };
       }
       return state;
     case UNLIKE_WORK:
       return {
         ...state,
-        user: {
+        likes: {
           ...state.user,
-          likes: state.user.likes.filter((like) => like !== action.payload),
+          likes: state.likes.likes.filter((like) => like !== action.payload),
         },
       };
     case SAVE_CALENDAR:

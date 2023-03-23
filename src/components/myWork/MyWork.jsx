@@ -28,7 +28,7 @@ function MyComponent({ likes }) {
 
   const dispatch = useDispatch();
   const myWork = useSelector((state) => state.work.workouts);
-  const myLikes = useSelector((state) => state.user.user.likes);
+  const myLikes = useSelector((state) => state.user.likes.likes);
 
   const handleLike = (e, likes) => {
     e.preventDefault();
