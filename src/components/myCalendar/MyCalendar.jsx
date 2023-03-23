@@ -11,7 +11,7 @@ const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 export default function MyCalendar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [calendarEntries, setCalendarEntries] = useState([]);
-  const myLikes = useSelector((state) => state.user.user.likes);
+  const myLikes = useSelector((state) => state.user.user.likes || []);
   const myToken = useSelector((state) => state.user.accessToken);
   const myCalendar = useSelector((state) => state.user.calendar);
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ export default function MyCalendar() {
     console.log(myLikes);
     console.log(myCalendar);
     console.log(calendarEntries);
+
     dispatch({ type: "ADD_CALENDAR_ENTRY", payload: calendarEntries });
   }, [calendarEntries, dispatch]);
   const handleClearCalendar = () => {
@@ -70,7 +71,7 @@ export default function MyCalendar() {
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
             >
-              {myLikes.map((like) => (
+              {myLikes?.map((like) => (
                 <ListGroup.Item
                   key={like}
                   onClick={() => setSelectedItem(like)}

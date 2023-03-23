@@ -11,8 +11,8 @@ const initialState = {
   users: [],
   user: [],
   accessToken: "",
-  likes: [],
   calendar: [],
+  likes: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -24,13 +24,14 @@ const userReducer = (state = initialState, action) => {
     case SAVE_USERS:
       return { ...state, users: action.payload };
     case LIKE_WORK:
+      console.log(state.user.likes);
       const likes = Array.isArray(action.payload)
         ? action.payload
         : [action.payload];
       const updatedLikes = [...new Set([...state.user.likes, ...likes])].filter(
         Boolean
       );
-      if (updatedLikes.length !== state.user.likes.length) {
+      if (updatedLikes.length !== state.likes.length) {
         return { ...state, user: { ...state.user, likes: updatedLikes } };
       }
       return state;

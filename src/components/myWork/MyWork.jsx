@@ -42,7 +42,7 @@ function MyComponent({ likes }) {
     // dispatch(likeWorkAction(like));
   };
 
-  const isLiked = myLikes.includes(likes);
+  const isLiked = myLikes?.includes(likes);
 
   useEffect(() => {
     dispatch(fetchWorkoutsAction());
@@ -99,7 +99,7 @@ function MyComponent({ likes }) {
               <Row className="mt-2">
                 <Col>{filteredCards[i]?.title}</Col>
                 <Col className="d-flex justify-content-end">
-                  {myLikes.includes(filteredCards[i]?.title) ? (
+                  {myLikes?.includes(filteredCards[i]?.title) ? (
                     <AiFillHeart
                       style={{ cursor: "pointer" }}
                       onClick={(e) => handleLike(e, filteredCards[i]?.title)}
