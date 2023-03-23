@@ -1,4 +1,5 @@
 import {
+  CLEAR_USER,
   LIKE_WORK,
   SAVE_CALENDAR,
   SAVE_TOKEN,
@@ -21,6 +22,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, accessToken: action.payload };
     case SAVE_USER:
       return { ...state, user: action.payload };
+    case CLEAR_USER:
+      return { ...state, user: [] };
     case SAVE_USERS:
       return { ...state, users: action.payload };
     case LIKE_WORK:
@@ -31,8 +34,11 @@ const userReducer = (state = initialState, action) => {
       const updatedLikes = [...new Set([...state.user.likes, ...likes])].filter(
         Boolean
       );
-      if (updatedLikes.length !== state.likes.length) {
-        return { ...state, user: { ...state.user, likes: updatedLikes } };
+      if (updatedLikes.length !== state.user.likes.length) {
+        return {
+          ...state,
+          user: { ...state.user.likes, likes: updatedLikes },
+        };
       }
       return state;
     case UNLIKE_WORK:

@@ -1,5 +1,7 @@
 export const SAVE_USER = "SAVE USER";
+export const CLEAR_USER = "CLEAR_USER";
 export const SAVE_USERS = "SAVE USERS";
+
 export const LIKE_WORK = "LIKE_WORK";
 export const UNLIKE_WORK = "UNLIKE_WORK";
 export const SAVE_TOKEN = "SAVE_TOKEN";
@@ -8,6 +10,10 @@ export const SAVE_CALENDAR = "SAVE_CALENDAR";
 export const CLEAR_CALENDAR = "CLEAR_CALENDAR";
 // export const SAVE_WORK = "SAVE_WORK";
 const apiUrl = process.env.BE_URL;
+
+export const clearUserAction = () => ({
+  type: "CLEAR_USER",
+});
 
 export const clearCalendarAction = () => ({
   type: "CLEAR_CALENDAR",

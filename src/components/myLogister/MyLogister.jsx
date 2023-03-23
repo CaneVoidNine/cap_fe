@@ -39,6 +39,7 @@ export default function MyLogister() {
 
         console.log(data.accessToken);
         dispatch(saveTokenAction(data.accessToken));
+        dispatch(getUserAction(data.accessToken));
         setTimeout(() => {
           navigate("/");
         }, 1000);
@@ -48,9 +49,9 @@ export default function MyLogister() {
     }
   };
 
-  useEffect(() => {
-    dispatch(getUserAction(token));
-  }, [token]);
+  // useEffect(() => {
+  //  );
+  // }, [token]);
 
   return (
     <div className="center">

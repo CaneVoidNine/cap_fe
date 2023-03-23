@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 import "./myNav.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWorkoutsAction } from "../../redux/actions";
+import { clearUserAction, fetchWorkoutsAction } from "../../redux/actions";
 import {
   getUserAction,
   saveTokenAction,
   saveUserAction,
 } from "../../redux/actions";
 export default function MyNav() {
+  const myUser = useSelector((state) => state.user.user.name);
   const dispatch = useDispatch();
   const logOut = () => {
-    dispatch(getUserAction([]));
+    dispatch(clearUserAction());
   };
 
   const myProfile = useSelector((state) => state.user.user);
@@ -109,34 +110,45 @@ export default function MyNav() {
             >
               Community
             </Nav.Link>
+            {myUser ? (
+              <Dropdown>
+                <Dropdown.Toggle variant="" id="profile-dropdown">
+                  <Image
+                    src={myProfile?.avatar}
+                    style={{
+                      width: "3rem",
 
-            <Dropdown>
-              <Dropdown.Toggle variant="" id="profile-dropdown">
-                <Image
-                  src={myProfile?.avatar}
-                  style={{
-                    width: "3rem",
+                      borderRadius: "50%",
+                      height: "2.7rem",
+                      aspectRatio: "1/1",
+                      boxShadow: "0 0 3px rgba(0,0,0,0.3)",
+                    }}
+                  />
+                </Dropdown.Toggle>
+                <Dropdown.Menu
+                  className=" dropdown-menu-right"
+                  style={{ fontSize: "1.2rem" }}
+                >
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
 
-                    borderRadius: "50%",
-                    height: "2.7rem",
-                    aspectRatio: "1/1",
-                    boxShadow: "0 0 3px rgba(0,0,0,0.3)",
-                  }}
-                />
-              </Dropdown.Toggle>
-              <Dropdown.Menu
-                className=" dropdown-menu-right"
-                style={{ fontSize: "1.2rem" }}
-              >
-                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-
-                <Dropdown.Item href="/">Settings</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={logOut} href="/login">
-                  Logout
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                  <Dropdown.Item href="/">Settings</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={logOut} href="/login">
+                    Logout
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <Link to="/login">
+                <Button
+                  className="mt-2"
+                  variant="dark"
+                  style={{ border: "1px solid " }}
+                >
+                  Sing in!
+                </Button>
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
