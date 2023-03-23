@@ -41,7 +41,7 @@ export default function MyCalendar() {
     <>
       <MyNav />
       <Container
-        className="mt-4 pb-4"
+        className="mt-4 pb-4 pad"
         style={{
           backgroundColor: "#F5F5F5",
           paddingInline: "0",

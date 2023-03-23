@@ -89,6 +89,17 @@ export default function MyNav() {
           <Nav>
             <Nav.Link
               className="tbc"
+              href="/calendar"
+              style={{
+                marginRight: "1rem",
+                fontSize: "1.5rem",
+                color: "white",
+              }}
+            >
+              Calendar
+            </Nav.Link>
+            <Nav.Link
+              className="tbc"
               href="/"
               style={{
                 marginRight: "1rem",
