@@ -77,7 +77,15 @@ export default function MyCalendar() {
               border: "1px solid white",
             }}
           >
-            <h2>Favourites</h2>
+            <h2
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              Favourites
+            </h2>
             <hr style={{ borderColor: "#C63B45" }} />
             <ListGroup
               style={{ overflowX: "auto", overflowY: "auto" }}
