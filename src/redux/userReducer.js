@@ -31,8 +31,11 @@ const userReducer = (state = initialState, action) => {
       const updatedLikes = [
         ...new Set([...state.likes.likes, ...likes]),
       ].filter(Boolean);
-      if (updatedLikes.length !== state.likes.length) {
-        return { ...state, likes: { ...state.likes, likes: updatedLikes } };
+      if (updatedLikes.length !== state.likes.likes.length) {
+        return {
+          ...state,
+          likes: { ...state.likes.likes, likes: updatedLikes },
+        };
       }
       return state;
     case UNLIKE_WORK:
