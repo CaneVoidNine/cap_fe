@@ -7,15 +7,15 @@ export default function MyStatic() {
   return (
     <Container
       fluid
-      className="bd"
+      className="bd px-2"
       style={{
         backgroundColor: "#202124",
-        borderRadius: "10px",
+
         boxShadow: "0px 0px 10px #C63B45",
       }}
     >
       <div className="card-group">
-        <Card className="col-sm-6 col-md-4 col-lg-3">
+        <Card className="col-sm-6 col-md-4 col-lg-3" style={{}}>
           <Card.Img src={img1} style={{ height: "100%" }} />
         </Card>
         <Card className="col-sm-6 col-md-4 col-lg-3">

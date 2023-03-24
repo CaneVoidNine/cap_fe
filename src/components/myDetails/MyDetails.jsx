@@ -111,7 +111,10 @@ export default function MyDetails() {
                         <p>{exercise?.info}</p>
                       </Col>
                       <Col>
-                        <img src={exercise?.image}></img>
+                        <img
+                          style={{ width: "100%" }}
+                          src={exercise?.image}
+                        ></img>
                       </Col>
                       <Col md={12}>
                         <h4 style={{ color: "#C63B45" }}>
