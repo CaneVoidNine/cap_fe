@@ -4,7 +4,7 @@ import { Container, Table, Row, Col, ListGroup, Button } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { clearCalendarAction } from "../../redux/actions";
+import { clearCalendarAction, clearWorkAction } from "../../redux/actions";
 
 const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
@@ -34,6 +34,9 @@ export default function MyCalendar() {
 
     dispatch({ type: "ADD_CALENDAR_ENTRY", payload: calendarEntries });
   }, [calendarEntries, dispatch]);
+  const handleClearLikes = () => {
+    dispatch(clearWorkAction());
+  };
   const handleClearCalendar = () => {
     dispatch(clearCalendarAction());
   };
@@ -165,6 +168,13 @@ export default function MyCalendar() {
         >
           <Button variant="outline-danger" onClick={handleClearCalendar}>
             Clear Calendar
+          </Button>
+          <Button
+            className="ml-2"
+            variant="outline-danger"
+            onClick={handleClearLikes}
+          >
+            Clear Favourties
           </Button>
         </Col>
       </Container>

@@ -5,6 +5,7 @@ import {
   SAVE_USER,
   SAVE_USERS,
   UNLIKE_WORK,
+  CLEAR_WORK,
 } from "./actions";
 
 const initialState = {
@@ -44,6 +45,14 @@ const userReducer = (state = initialState, action) => {
         likes: {
           ...state.user,
           likes: state.likes.likes.filter((like) => like !== action.payload),
+        },
+      };
+    case CLEAR_WORK:
+      return {
+        ...state,
+        likes: {
+          ...state.likes,
+          likes: [], // set likes.likes to an empty array
         },
       };
     case SAVE_CALENDAR:

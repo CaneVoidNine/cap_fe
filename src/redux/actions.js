@@ -3,6 +3,7 @@ export const SAVE_USERS = "SAVE USERS";
 export const LIKE_WORK = "LIKE_WORK";
 export const UNLIKE_WORK = "UNLIKE_WORK";
 export const SAVE_TOKEN = "SAVE_TOKEN";
+export const CLEAR_WORK = "CLEAR_WORK";
 export const FETCH_WORK = "FETCH_WORK";
 export const SAVE_CALENDAR = "SAVE_CALENDAR";
 export const CLEAR_CALENDAR = "CLEAR_CALENDAR";
@@ -33,7 +34,9 @@ export const likeWorkAction = (likes) => {
     payload: likes,
   };
 };
-
+export const clearWorkAction = (likes) => ({
+  type: CLEAR_WORK,
+});
 export const saveUserAction = (user) => {
   return {
     type: SAVE_USER,
