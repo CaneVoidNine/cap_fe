@@ -33,7 +33,7 @@ export default function MyAdd() {
     formData.append("title", title);
     formData.append("info", info);
     // let noDuplicates = [...new Set(morb)];
-    formData.append("exercises", morb);
+    formData.append("exercises", JSON.stringify(morb));
     try {
       const options = {
         method: "POST",
