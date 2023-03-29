@@ -21,6 +21,7 @@ export default function MyAdd() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [exe, setExe] = useState([]);
   const [morb, setMorb] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -32,7 +33,7 @@ export default function MyAdd() {
     formData.append("title", title);
     formData.append("info", info);
     // let noDuplicates = [...new Set(morb)];
-    formData.append("exercises", morb);
+    formData.append("exercises", JSON.stringify(morb));
     try {
       const options = {
         method: "POST",
@@ -61,7 +62,12 @@ export default function MyAdd() {
       ...prevSelectedOptions,
       [index]: eventKey,
     }));
+
+    if (index === numDropdowns - 1) {
+      setNumDropdowns(numDropdowns + 1);
+    }
   };
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -103,8 +109,8 @@ export default function MyAdd() {
   const dropdowns = [];
   for (let i = 0; i < numDropdowns; i++) {
     dropdowns.push(
-      <Form.Group controlId={`formDropdown-${i}`} key={i}>
-        <Form.Label>Select an exerise:</Form.Label>
+      <Form.Group className="mt-2" controlId={`formDropdown-${i}`} key={i}>
+        <Form.Label style={{ color: "#C63B45" }}>Pick exercises:</Form.Label>
         <Dropdown onSelect={(eventKey) => handleSelect(eventKey, i)}>
           <Dropdown.Toggle variant="dark">{selectedOptions[i]}</Dropdown.Toggle>
           <Dropdown.Menu>{axe}</Dropdown.Menu>
@@ -112,6 +118,7 @@ export default function MyAdd() {
       </Form.Group>
     );
   }
+
   return (
     <>
       <MyNav />
@@ -119,7 +126,7 @@ export default function MyAdd() {
         <Container>
           <Row className=" d-flex justify-content-md-center">
             <Col xs={12} md={6}>
-              <Row
+              {/* <Row
                 className="mt-4 d-flex justify-content-center"
                 style={{
                   width: "100%",
@@ -129,11 +136,9 @@ export default function MyAdd() {
                   border: "solid 1px #C63B45",
                   // boxShadow: "0px 0px 10px #C63B45",
                 }}
-              >
-                <Col className="p-2  d-flex justify-content-center">
-                  <h2>Add New Workout!</h2>
-                </Col>
-              </Row>
+              > */}
+
+              {/* </Row> */}
               <Form
                 className="p-4"
                 style={{
@@ -146,6 +151,9 @@ export default function MyAdd() {
                 }}
                 onSubmit={handleSubmit}
               >
+                <Col className="  d-flex justify-content-center">
+                  <h2>Add New Workout!</h2>
+                </Col>
                 <Form.Group controlId="formTitle">
                   <Form.Label style={{ color: "#C63B45" }}>Name</Form.Label>
                   <Form.Control
@@ -177,19 +185,8 @@ export default function MyAdd() {
                     accept="image/*"
                   />
                 </Form.Group>
-                <Form>
-                  <Form.Group className="mt-2" controlId="formNumDropdowns">
-                    <Form.Label style={{ color: "#C63B45" }}>
-                      Number of Exercises:
-                    </Form.Label>
-                    <Form.Control
-                      type="number"
-                      value={numDropdowns}
-                      onChange={handleNumChange}
-                    />
-                  </Form.Group>
-                  {dropdowns}
-                </Form>
+
+                {dropdowns}
 
                 <Button
                   className="mt-4"
