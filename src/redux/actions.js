@@ -1,7 +1,8 @@
 export const SAVE_USER = "SAVE USER";
 export const SAVE_USERS = "SAVE USERS";
-export const LIKE_WORK = "LIKE_WORK";
-export const UNLIKE_WORK = "UNLIKE_WORK";
+
+export const SAVE_LIKES = "SAVE_LIKES_SUCCESS";
+export const DELETE_LIKES = "DELETE_LIKES_SUCCESS";
 export const SAVE_TOKEN = "SAVE_TOKEN";
 export const CLEAR_WORK = "CLEAR_WORK";
 export const FETCH_WORK = "FETCH_WORK";
@@ -24,16 +25,68 @@ export const saveCalendarAction = (calendar) => ({
 //     payload: workout,
 //   };
 // };
-export const unlikeWorkAction = (likes) => ({
-  type: UNLIKE_WORK,
-  payload: likes,
-});
-export const likeWorkAction = (likes) => {
-  return {
-    type: LIKE_WORK,
-    payload: likes,
+
+export const saveLikesAction = (workoutId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.accessToken;
+
+    const optionsPut = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json", // add Content-Type header
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:3002/users/me/likes/${workoutId}`, // add / between likes and workoutId
+        optionsPut
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: SAVE_LIKES, payload: data });
+      } else {
+        throw new Error("Network response was not ok.");
+      }
+    } catch (error) {
+      console.log(error);
+      // dispatch an error action or throw an error
+    }
   };
 };
+export const deleteLikesAction = (workoutId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.accessToken;
+
+    const optionsDelete = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:3002/users/me/likes/${workoutId}`,
+        optionsDelete
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: DELETE_LIKES, payload: workoutId });
+      } else {
+        throw new Error("Network response was not ok.");
+      }
+    } catch (error) {
+      console.log(error);
+      // dispatch an error action or throw an error
+    }
+  };
+};
+
 export const clearWorkAction = (likes) => ({
   type: CLEAR_WORK,
 });

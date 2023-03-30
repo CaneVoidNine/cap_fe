@@ -11,7 +11,7 @@ const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 export default function MyCalendar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [calendarEntries, setCalendarEntries] = useState([]);
-  const myLikes = useSelector((state) => state.user.likes.likes || []);
+  const myLikes = useSelector((state) => state.user.user.likes || []);
   const myToken = useSelector((state) => state.user.accessToken);
   const myCalendar = useSelector((state) => state.user.calendar);
   const dispatch = useDispatch();

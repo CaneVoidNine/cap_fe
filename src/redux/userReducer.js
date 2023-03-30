@@ -6,6 +6,8 @@ import {
   SAVE_USERS,
   UNLIKE_WORK,
   CLEAR_WORK,
+  SAVE_LIKES,
+  DELETE_LIKES,
 } from "./actions";
 
 const initialState = {
@@ -24,37 +26,50 @@ const userReducer = (state = initialState, action) => {
       return { ...state, user: action.payload };
     case SAVE_USERS:
       return { ...state, users: action.payload };
-    case LIKE_WORK:
-      console.log(state.likes.likes);
-      const likes = Array.isArray(action.payload)
-        ? action.payload
-        : [action.payload];
-      const updatedLikes = [
-        ...new Set([...state.likes.likes, ...likes]),
-      ].filter(Boolean);
-      if (updatedLikes.length !== state.likes.likes.length) {
-        return {
-          ...state,
-          likes: { ...state.likes.likes, likes: updatedLikes },
-        };
-      }
-      return state;
-    case UNLIKE_WORK:
+    case SAVE_LIKES:
       return {
         ...state,
-        likes: {
+        user: { ...state.user, likes: action.payload.likes }, // update the likes property of the user object with the new likes
+      };
+    case DELETE_LIKES:
+      return {
+        ...state,
+        user: {
           ...state.user,
-          likes: state.likes.likes.filter((like) => like !== action.payload),
+          likes: state.user.likes.filter((id) => id !== action.payload),
         },
       };
-    case CLEAR_WORK:
-      return {
-        ...state,
-        likes: {
-          ...state.likes,
-          likes: [], // set likes.likes to an empty array
-        },
-      };
+    // case LIKE_WORK:
+    //   console.log(state.likes);
+    //   const likes = Array.isArray(action.payload)
+    //     ? action.payload
+    //     : [action.payload];
+    //   const updatedLikes = [
+    //     ...new Set([...state.likes.likes, ...likes]),
+    //   ].filter(Boolean);
+    //   if (updatedLikes.length !== state.likes.likes.length) {
+    //     return {
+    //       ...state.likes,
+    //       likes: { ...state.likes.likes, likes: updatedLikes },
+    //     };
+    //   }
+    //   return state;
+    // case UNLIKE_WORK:
+    //   return {
+    //     ...state,
+    //     likes: {
+    //       ...state,
+    //       likes: state.likes.likes.filter((like) => like !== action.payload),
+    //     },
+    //   };
+    // case CLEAR_WORK:
+    //   return {
+    //     ...state,
+    //     likes: {
+    //       ...state.likes,
+    //       likes: [], // set likes.likes to an empty array
+    //     },
+    //   };
     case SAVE_CALENDAR:
       const newEntry = action.payload;
       const currentCalendar = state.calendar;

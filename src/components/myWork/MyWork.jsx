@@ -20,36 +20,49 @@ import {
   fetchWorkoutsAction,
   likeWorkAction,
   unlikeWorkAction,
+  saveLikesAction,
+  deleteLikesAction,
 } from "../../redux/actions";
 
-function MyComponent({ likes }) {
+function MyComponent({ workout }) {
   const [activePage, setActivePage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [likedWorkouts, setLikedWorkouts] = useState([]);
   const dispatch = useDispatch();
   const myWork = useSelector((state) => state.work.workouts);
-  const myLikes = useSelector((state) => state.user.likes.likes);
-
-  const handleLike = (e, likes) => {
-    e.preventDefault();
-    if (myLikes.includes(likes)) {
-      dispatch(unlikeWorkAction(likes));
+  const myLikes = useSelector((state) => state.user.user.likes);
+  const { user } = useSelector((state) => state.user.user);
+  const handleLike = (e, workout) => {
+    if (myLikes.includes(workout._id)) {
+      dispatch(deleteLikesAction(workout._id));
     } else {
-      dispatch(likeWorkAction(likes));
+      dispatch(saveLikesAction(workout._id));
     }
-
-    // console.log(likes);
-    // dispatch(likeWorkAction(like));
   };
 
-  const isLiked = myLikes?.includes(likes);
+  // e.preventDefault();
+  // if (myLikes.includes(likes)) {
+  //   dispatch(unlikeWorkAction(likes));
+  // } else {
+  //   dispatch(likeWorkAction(likes));
+
+  // const handleUnlike = () => {
+  //   dispatch(deleteLikesAction(workout._id))
+  // } here
+  // console.log(likes);
+  // dispatch(likeWorkAction(like));
 
   useEffect(() => {
     dispatch(fetchWorkoutsAction());
-    console.log(likes);
-    console.log(myLikes);
+    console.log(user);
     console.log(myWork);
-  }, [likes]);
+    console.log(workout);
+    if (user && user.likes) {
+      setLikedWorkouts(user.user.likes);
+    }
+    console.log(myLikes);
+    console.log(likedWorkouts);
+  }, [myLikes]);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -103,18 +116,17 @@ function MyComponent({ likes }) {
                   <h2>{filteredCards[i]?.title}</h2>
                 </Col>
                 <Col className="d-flex justify-content-end ms-auto">
-                  {myLikes?.includes(filteredCards[i]?.title) ? (
+                  {myLikes.includes(filteredCards[i]._id) ? (
                     <AiFillHeart
-                      className=""
                       style={{ cursor: "pointer" }}
                       color="#C63B45"
-                      onClick={(e) => handleLike(e, filteredCards[i]?.title)}
+                      onClick={(e) => handleLike(e, filteredCards[i])}
                     />
                   ) : (
                     <AiOutlineHeart
                       style={{ cursor: "pointer" }}
                       color="#C63B45"
-                      onClick={(e) => handleLike(e, filteredCards[i]?.title)}
+                      onClick={(e) => handleLike(e, filteredCards[i])}
                     />
                   )}
                 </Col>
