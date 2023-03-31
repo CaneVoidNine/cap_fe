@@ -60,15 +60,17 @@ export default function MyCalendar() {
   const hours = Array.from({ length: 15 }, (_, i) => i + 8);
   useEffect(() => {
     getExercises();
-    console.log(exercises);
   }, []);
+
   useEffect(() => {
+    console.log(myToken);
     console.log(myLikes);
     console.log(myCalendar);
     console.log(calendarEntries);
-
+    console.log(exercises.likes);
     dispatch({ type: "ADD_CALENDAR_ENTRY", payload: calendarEntries });
   }, [calendarEntries, dispatch]);
+
   const handleClearLikes = () => {
     dispatch(clearWorkAction());
   };
@@ -130,10 +132,10 @@ export default function MyCalendar() {
               style={{ overflowX: "auto", overflowY: "auto" }}
               vertical
             >
-              {myLikes?.map((like) => (
+              {exercises.likes?.map((like) => (
                 <ListGroup.Item
                   key={like}
-                  onClick={() => setSelectedItem(like)}
+                  onClick={() => setSelectedItem(like.title)}
                   active={selectedItem === like}
                   className="mt-1"
                   style={{
@@ -143,7 +145,7 @@ export default function MyCalendar() {
                     border: "1px solid #C63B45",
                   }}
                 >
-                  {like}
+                  {like.title}
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -204,13 +206,6 @@ export default function MyCalendar() {
         >
           <Button variant="outline-danger" onClick={handleClearCalendar}>
             Clear Calendar
-          </Button>
-          <Button
-            className="ml-2"
-            variant="outline-danger"
-            onClick={handleClearLikes}
-          >
-            Clear Favourties
           </Button>
         </Col>
       </Container>
