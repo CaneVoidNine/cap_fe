@@ -57,6 +57,7 @@ function MyComponent({ workout }) {
     console.log(user);
     console.log(myWork);
     console.log(workout);
+
     if (user && user.likes) {
       setLikedWorkouts(user.user.likes);
     }

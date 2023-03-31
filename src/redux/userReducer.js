@@ -8,6 +8,7 @@ import {
   CLEAR_WORK,
   SAVE_LIKES,
   DELETE_LIKES,
+  GET_EXE,
 } from "./actions";
 
 const initialState = {
@@ -16,10 +17,13 @@ const initialState = {
   accessToken: "",
   calendar: [],
   likes: [],
+  exe: [],
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_EXE:
+      return { ...state, exe: action.payload };
     case SAVE_TOKEN:
       return { ...state, accessToken: action.payload };
     case SAVE_USER:

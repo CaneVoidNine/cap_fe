@@ -4,16 +4,22 @@ import { Container, Table, Row, Col, ListGroup, Button } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { clearCalendarAction, clearWorkAction } from "../../redux/actions";
+import {
+  clearCalendarAction,
+  clearWorkAction,
+  getExercisesAction,
+} from "../../redux/actions";
 
 const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
 export default function MyCalendar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [calendarEntries, setCalendarEntries] = useState([]);
+  const [exercises, setExercises] = useState([]);
   const myLikes = useSelector((state) => state.user.user.likes || []);
   const myToken = useSelector((state) => state.user.accessToken);
   const myCalendar = useSelector((state) => state.user.calendar);
+  const myExe = useSelector((state) => state.user.exe);
   const dispatch = useDispatch();
   const days = [
     "Monday",
@@ -24,9 +30,38 @@ export default function MyCalendar() {
     "Saturday",
     "Sunday",
   ];
+  const getExercises = async () => {
+    const optionsPut = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${myToken}`,
+        "Content-Type": "application/json", // add Content-Type header
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:3002/users/me/myExe`, // add / between likes and workoutId
+        optionsPut
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setExercises(data);
+      } else {
+        throw new Error("Network response was not ok.");
+      }
+    } catch (error) {
+      console.log(error);
+      // dispatch an error action or throw an error
+    }
+  };
 
   const hours = Array.from({ length: 15 }, (_, i) => i + 8);
-
+  useEffect(() => {
+    getExercises();
+    console.log(exercises);
+  }, []);
   useEffect(() => {
     console.log(myLikes);
     console.log(myCalendar);
@@ -40,6 +75,7 @@ export default function MyCalendar() {
   const handleClearCalendar = () => {
     dispatch(clearCalendarAction());
   };
+
   return (
     <div className=" pad">
       <MyNav />

@@ -1,6 +1,6 @@
 export const SAVE_USER = "SAVE USER";
 export const SAVE_USERS = "SAVE USERS";
-
+export const GET_EXE = "GET_EXE";
 export const SAVE_LIKES = "SAVE_LIKES_SUCCESS";
 export const DELETE_LIKES = "DELETE_LIKES_SUCCESS";
 export const SAVE_TOKEN = "SAVE_TOKEN";
@@ -25,7 +25,36 @@ export const saveCalendarAction = (calendar) => ({
 //     payload: workout,
 //   };
 // };
+export const getExercisesAction = () => {
+  return async (dispatch, getState) => {
+    const token = getState().user.accessToken;
 
+    const optionsPut = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json", // add Content-Type header
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:3002/users/me/myExe`, // add / between likes and workoutId
+        optionsPut
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: "GET_EXE", payload: data });
+      } else {
+        throw new Error("Network response was not ok.");
+      }
+    } catch (error) {
+      console.log(error);
+      // dispatch an error action or throw an error
+    }
+  };
+};
 export const saveLikesAction = (workoutId) => {
   return async (dispatch, getState) => {
     const token = getState().user.accessToken;
