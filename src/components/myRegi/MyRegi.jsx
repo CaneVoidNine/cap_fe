@@ -70,7 +70,9 @@ export default function MyRegi() {
               onSubmit={handleSubmit}
             >
               <Form.Group controlId="formName">
-                <Form.Label style={{ color: "#C63B45" }}>Name</Form.Label>
+                <Form.Label className="dfr" style={{ color: "#C63B45" }}>
+                  Name
+                </Form.Label>
                 <Form.Control
                   onChange={(e) => setName(e.target.value)}
                   type="text"
@@ -79,7 +81,9 @@ export default function MyRegi() {
                 />
               </Form.Group>
               <Form.Group className="mt-2" controlId="formLastName">
-                <Form.Label style={{ color: "#C63B45" }}>Last Name</Form.Label>
+                <Form.Label className="dfr" style={{ color: "#C63B45" }}>
+                  Last Name
+                </Form.Label>
                 <Form.Control
                   onChange={(e) => setLastName(e.target.value)}
                   type="text"
@@ -88,7 +92,7 @@ export default function MyRegi() {
                 />
               </Form.Group>
               <Form.Group className="mt-2" controlId="formBasicEmail">
-                <Form.Label style={{ color: "#C63B45" }}>
+                <Form.Label className="dfr" style={{ color: "#C63B45" }}>
                   Email address
                 </Form.Label>
                 <Form.Control
@@ -100,7 +104,9 @@ export default function MyRegi() {
               </Form.Group>
 
               <Form.Group className="mt-2" controlId="formBasicPassword">
-                <Form.Label style={{ color: "#C63B45" }}>Password</Form.Label>
+                <Form.Label className="dfr" style={{ color: "#C63B45" }}>
+                  Password
+                </Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"

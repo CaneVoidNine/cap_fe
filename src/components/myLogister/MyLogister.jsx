@@ -68,13 +68,16 @@ export default function MyLogister() {
             <Form
               style={{
                 padding: "1rem",
-                fontFamily: "Open Sans, sans serif",
+                fontFamily: "Georgia, Times New Roman, Times, serif",
                 fontSize: "16px",
               }}
               onSubmit={handleSubmit}
             >
               <Form.Group controlId="formBasicEmail">
-                <Form.Label style={{ color: "#C63B45" }}>
+                <Form.Label
+                  className="dfr"
+                  style={{ color: "#C63B45", fontFamily: "Arial" }}
+                >
                   Email address
                 </Form.Label>
                 <Form.Control
@@ -86,7 +89,9 @@ export default function MyLogister() {
               </Form.Group>
 
               <Form.Group className="mt-2" controlId="formBasicPassword">
-                <Form.Label style={{ color: "#C63B45" }}>Password</Form.Label>
+                <Form.Label className="dfr" style={{ color: "#C63B45" }}>
+                  Password
+                </Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"

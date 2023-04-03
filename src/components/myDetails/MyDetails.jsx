@@ -162,11 +162,11 @@ export default function MyDetails() {
             }}
           ></Image>
         </Row>
-        {/* <Row className="d-flex justify-content-end mr-3">
+        <Row className="d-flex justify-content-end mr-3">
           <Button onClick={handleDelete} variant="danger">
             Delete
           </Button>
-        </Row> */}
+        </Row>
         <Container
           className="mt-3 pb-3"
           style={{

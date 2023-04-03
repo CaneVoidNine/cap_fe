@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { Container, Table, Row, Col, ListGroup, Button } from "react-bootstrap";
 import MyNav from "../myNav/MyNav";
+import "./MyCalendar.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -16,6 +17,7 @@ export default function MyCalendar() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [calendarEntries, setCalendarEntries] = useState([]);
   const [exercises, setExercises] = useState([]);
+  const [highlight, setHighlight] = useState(false);
   const myLikes = useSelector((state) => state.user.user.likes || []);
   const myToken = useSelector((state) => state.user.accessToken);
   const myCalendar = useSelector((state) => state.user.calendar);
@@ -61,7 +63,9 @@ export default function MyCalendar() {
   useEffect(() => {
     getExercises();
   }, []);
-
+  useEffect(() => {
+    console.log(selectedItem);
+  }, [selectedItem]);
   useEffect(() => {
     console.log(myToken);
     console.log(myLikes);
@@ -95,7 +99,6 @@ export default function MyCalendar() {
           className="mb-4"
           style={{
             width: "100%",
-
             marginInline: "0",
             paddingInline: "0",
             backgroundColor: "#202124",
@@ -134,14 +137,15 @@ export default function MyCalendar() {
             >
               {exercises.likes?.map((like) => (
                 <ListGroup.Item
-                  key={like}
-                  onClick={() => setSelectedItem(like.title)}
-                  active={selectedItem === like}
+                  key={like.title}
+                  onClick={() => {
+                    setSelectedItem(like.title);
+                    setHighlight(true);
+                  }}
+                  active={selectedItem === like.title}
                   className="mt-1"
                   style={{
                     cursor: "pointer",
-                    // color: "white",
-
                     border: "1px solid #C63B45",
                   }}
                 >
@@ -182,7 +186,10 @@ export default function MyCalendar() {
                               type: "SAVE_CALENDAR",
                               payload: newEntry,
                             });
+                            setSelectedItem("");
+                            setHighlight(false);
                           }}
+                          className={highlight ? "selectable" : ""}
                         >
                           {myCalendar
                             .filter(
